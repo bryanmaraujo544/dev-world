@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Logo } from '../components/Logo';
-import { Heading, HeadingProps, Box, useColorMode, useColorModeValue } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { useDarkLightColors } from './hooks/useDarkLightColors.';
+import { Heading, HeadingProps, Box } from '@chakra-ui/react';
 import { Header } from '../components/Header';
 import { Login } from '../components/Login';
 
@@ -11,11 +12,10 @@ import { Login } from '../components/Login';
 export const MotionHeading = motion<HeadingProps>(Heading);
 
 const Home: NextPage = () => {
-     // Function that return the currently color mode and one function to toggle that
-     const { colorMode, toggleColorMode } = useColorMode();
-     const color = useColorModeValue("text.light", "text.dark");
+     const { colorMode } = useDarkLightColors('bg.light', 'bg.dark');
+
      return (
-          <Box bg="bg.light" h="100vh">
+          <Box bg={colorMode} h="100vh">
                <Header />
                <Login />
           </Box>
