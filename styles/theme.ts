@@ -7,6 +7,7 @@ const colors = {
      },
      blue: {
           primary: "#1A1B41",
+          secondary: "#2269A9"
      },
      text: {
           400: "#ADB5BD",
