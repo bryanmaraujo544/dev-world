@@ -12,10 +12,10 @@ import { Login } from '../components/Login';
 export const MotionHeading = motion<HeadingProps>(Heading);
 
 const Home: NextPage = () => {
-     const { colorMode } = useDarkLightColors('bg.light', 'bg.dark');
+     const colorMode = useDarkLightColors('bg.light', 'bg.dark');
 
      return (
-          <Box bg={colorMode} h="100vh">
+          <Box bg={colorMode} h={['100%', '100%', '100%', '100vh']}>
                <Header />
                <Login />
           </Box>

@@ -18,6 +18,11 @@ const colors = {
      }
 }
 
+const fonts = {
+     fonts: {
+          poppins: 'Poppins',
+     }
+}
 
 const config : ThemeConfig = {
      initialColorMode: "dark",
@@ -26,5 +31,5 @@ const config : ThemeConfig = {
 
 
 
-const theme = extendTheme({ colors, config });
+const theme = extendTheme({ colors, config, fonts });
 export default theme;
