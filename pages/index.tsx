@@ -12,14 +12,20 @@ import { Login } from '../components/Login';
 export const MotionHeading = motion<HeadingProps>(Heading);
 
 const Home: NextPage = () => {
-     const colorMode = useDarkLightColors('bg.light', 'bg.dark');
+    const colorMode = useDarkLightColors('bg.light', 'bg.dark');
 
-     return (
-          <Box bg={colorMode} h={['100%', null, null, '100vh']}>
-               <Header />
-               <Login />
-          </Box>
-     )
+    return (
+        <Box 
+            maxHeight="100vh" 
+            maxWidth="100vw" 
+            overflow="hidden" 
+            bg={colorMode} 
+            h={['100%', null, null, '100vh']}
+        >
+            <Header />
+            <Login />
+        </Box>
+    )
 }
 
 export default Home;
