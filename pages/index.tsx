@@ -1,30 +1,57 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Logo } from '../components/Logo';
+import { BiSearchAlt } from 'react-icons/bi';
 import { useDarkLightColors } from '../hooks/useDarkLightColors';
-import { Heading, HeadingProps, Box } from '@chakra-ui/react';
+import { Box, Flex, Input } from '@chakra-ui/react';
 import { Header } from '../components/Header';
-import { Login } from '../components/Login';
+import {  MotionFlex } from '../utils/getMotionComponents';
 
-// Chakra component with motion element
-export const MotionHeading = motion<HeadingProps>(Heading);
 
 const Home: NextPage = () => {
-    const colorMode = useDarkLightColors('bg.light', 'bg.dark');
-
+    const bgColor = useDarkLightColors('bg.light', 'bg.dark');
+    const inputBg = useDarkLightColors('gray.200', 'gray.800');
+    const inputColor = useDarkLightColors('text.600', 'gray.500');
+    
+    
     return (
         <Box 
             maxHeight="100vh" 
             maxWidth="100vw" 
             overflow="hidden" 
-            bg={colorMode} 
+            bg={bgColor} 
             h={['100%', null, null, '100vh']}
+            px={[8, 12, 16, 20, 24]}
         >
             <Header />
-            <Login />
+            <Flex direction="column">
+                <Flex h="80px">
+                    <Input 
+                        placeholder="Type a dev's name..." 
+                        bg={inputBg}
+                        px={8}
+                        height="100%"
+                        rounded="16px"
+                        color={inputColor}
+                        fontWeight="700"
+                        fontSize="20px"
+                        border="none"
+                        boxShadow="sm"
+                        mr={2}
+                    />
+                    <MotionFlex
+                        h="100%"
+                        w="100px"
+                        align="center"
+                        justify="center"
+                        cursor="pointer"
+                        rounded="16px"
+                        bgGradient="linear(to-tr, blue.primary, blue.secondary)"
+                    >
+                        <BiSearchAlt color="white" size="36px" />
+                    </MotionFlex>
+                </Flex>
+            </Flex>
         </Box>
+   
     )
 }
 
