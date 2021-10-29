@@ -12,9 +12,9 @@ export const LoginAuth = () => {
     return (
         <Flex mb={[12, null, null, 0]} direction='column'>
             <MotionFormControl variants={fastContainerVariants} initial="hidden" animate="show" isRequired>
-                <MotionInput variants={xRightAnimationVariants} placeholder="Enter your email" p={6} bg={inputBg} border="none" fontWeight="bold" color={inputColor} boxShadow="sm" rounded="16px" />
-                <MotionInput variants={xRightAnimationVariants} placeholder="Enter your password" p={6} mt={6} bg={inputBg} border="none" fontWeight="bold" color={inputColor} boxShadow="sm" rounded="16px" />
-                <Button>Sign In</Button>
+                <MotionInput variants={xRightAnimationVariants} placeholder="Enter your email" p={10} bg={inputBg} border="none"  fontSize="xl" fontWeight="bold" color={inputColor} boxShadow="sm" rounded="16px" />
+                <MotionInput variants={xRightAnimationVariants} placeholder="Enter your password" p={10} mt={6} bg={inputBg} border="none"  fontSize="xl" fontWeight="bold" color={inputColor} boxShadow="sm" rounded="16px" />
+                <Button >Sign In</Button>
             </MotionFormControl>
             <SocialAuth />
         </Flex>
