@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import rocketDark from '../public/Saly-1-1.svg';
 import rocketLight from '../public/Saly-1.svg';
-import { motion, useAnimation } from 'framer-motion';
+import { useAnimation } from 'framer-motion';
 import { useDarkLightColors } from '../hooks/useDarkLightColors';
 import { useColorMode, Grid, GridItem, Box, Flex, Text, Heading, FormControl, Input, Button } from '@chakra-ui/react';
 import { MotionBox, MotionText, MotionHeading, MotionFlex } from '../utils/getMotionComponents';
@@ -27,13 +27,14 @@ export const TextSectionAuth = ({
      const rocketControl = useAnimation();
      useEffect(() => {
           rocketControl.start('animate')
-     }, [])
+     }, []);
 
      const handleRocket = async () => {
           await rocketControl.start('takeOff');
           rocketControl.start('animate');
      }
-     const upDown = {
+
+     const upDownVariant = {
           initial: {
                opacity: 0
           },
@@ -57,9 +58,6 @@ export const TextSectionAuth = ({
                }
           }
      }
-     
-
-
 
      return (
           <MotionFlex direction="column" align={['center', 'center', 'center', 'start']} variants={slowContainerVariants} initial="hidden" animate="show" >
@@ -76,7 +74,7 @@ export const TextSectionAuth = ({
                </MotionText>
                <MotionBox 
                     onClick={() => handleRocket()}
-                    variants={upDown}
+                    variants={upDownVariant}
                     animate={rocketControl}
                     initial="initial"
                     cursor="pointer"

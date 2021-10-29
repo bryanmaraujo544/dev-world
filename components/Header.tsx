@@ -38,14 +38,11 @@ export const Header = () => {
             as='header'
             align='center'
             justify='space-between'
-            
             py={8}
+           
 
         >
-            <Flex
-                w={['125px', '200px']}
-                position="relative"
-            >
+            <Flex w={['125px', '200px']} position="relative">
                 <Logo
                     isLight={colorMode === 'light' ? true : false}
                 />

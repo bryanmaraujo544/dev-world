@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import { Header } from '../components/Header';
-import { Login as LoginSection } from '../components/Login';
+import LoginSection from '../components/Login';
 import { useDarkLightColors } from '../hooks/useDarkLightColors';
 import { Box } from '@chakra-ui/react';
 
 
-export const Login : NextPage = () => {
+const Login : NextPage = () => {
     const colorMode = useDarkLightColors('bg.light', 'bg.dark');
 
     return (
@@ -22,3 +22,5 @@ export const Login : NextPage = () => {
         </Box>
     )
 }
+
+export default Login;
