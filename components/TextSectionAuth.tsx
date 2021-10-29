@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import rocketDark from '../public/Saly-1-1.svg';
 import rocketLight from '../public/Saly-1.svg';
-import { useAnimation } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { useDarkLightColors } from '../hooks/useDarkLightColors';
 import { useColorMode, Grid, GridItem, Box, Flex, Text, Heading, FormControl, Input, Button } from '@chakra-ui/react';
 import { MotionBox, MotionText, MotionHeading, MotionFlex } from '../utils/getMotionComponents';
@@ -27,7 +27,7 @@ export const TextSectionAuth = ({
      const rocketControl = useAnimation();
      useEffect(() => {
           rocketControl.start('animate')
-     }, []);
+     }, [])
 
      const handleRocket = async () => {
           await rocketControl.start('takeOff');
@@ -42,12 +42,11 @@ export const TextSectionAuth = ({
                opacity: 1,
                x: 0,
                y: [0, -30, 0, -30],
-               
                transition: {
                     delay: 1,
                     duration: 5,
                     repeat: Infinity,
-                    repeatType: "mirror"
+                    // repeatType: "mirror"
                }
           },
           takeOff: {
@@ -61,7 +60,7 @@ export const TextSectionAuth = ({
 
      return (
           <MotionFlex direction="column" align={['center', 'center', 'center', 'start']} variants={slowContainerVariants} initial="hidden" animate="show" >
-               <MotionHeading variants={xAnimationVariants} maxWidth="700px" textAlign={["center", null, null, 'left']} fontFamily="fonts.poppins" as="h1" size="3xl" fontWeight="900" lineHeight={1.3}> 
+               <MotionHeading variants={xAnimationVariants} maxWidth={['400px', null, '450px', '600px', '800px']} textAlign={["center", null, null, 'left']} fontFamily="fonts.poppins" as="h1" fontSize={['3xl', null, null, null, '56px']} fontWeight="900" lineHeight={1.3}> 
                     {title}
                </MotionHeading>
                <MotionText variants={xAnimationVariants} textAlign={["center", null, null, 'left']} fontSize="xl" fontWeight="500" color={grayColor} mt={2} mr={1}>
