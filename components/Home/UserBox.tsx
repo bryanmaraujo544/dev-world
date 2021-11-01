@@ -6,6 +6,7 @@ import {
   RiGitRepositoryLine,
   RiStarSmileLine,
   RiToolsFill,
+  RiEmotionSadLine,
 } from 'react-icons/ri';
 import { useColorMode } from '@chakra-ui/color-mode';
 import ReactLoading from 'react-loading';
@@ -60,7 +61,12 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
         </Flex>
       ) : hasError ? (
         <Flex gridColumn="1 / 5" justify="center">
-          <Text> This User Doesn't Exists. </Text>
+          <Flex align="center">
+            <RiEmotionSadLine size="64px" />
+            <Text ml={4} fontSize={['2xl', null, null, '4xl']} fontWeight="700">
+              This User Doesn't Exists.
+            </Text>
+          </Flex>
         </Flex>
       ) : (
         <>
