@@ -13,7 +13,13 @@ type User = {
   name: string,
   login: string,
   public_repos: number,
-  starred_repos: number
+  starred_repos: number,
+  mostUsedLangs: string[],
+  followers_url: string,
+  following_url: string,
+  repos_url: string,
+  starred_url: string
+
 }
 
 export const Home = () => {
@@ -21,8 +27,7 @@ export const Home = () => {
   const [user, setUser] = useState<null | User>(null);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log({user}, {hasError}, {isLoading});
+  console.log({user});
 
   return (
     <Box 

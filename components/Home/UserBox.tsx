@@ -12,7 +12,12 @@ type User = {
     name: string,
     login: string,
     public_repos: number,
-    starred_repos: number
+    starred_repos: number,
+    mostUsedLangs: string[],
+    followers_url: string,
+    following_url: string,
+    repos_url: string,
+    starred_url: string
 }
 
 type props = {
@@ -29,8 +34,6 @@ export const UserBox = ({
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
   const titleColor = useDarkLightColors('text.light', 'text.dark');
-
-  console.log({isLoading})
 
   return (
     <Grid 
@@ -78,43 +81,43 @@ export const UserBox = ({
                 
                 {/* Bio */}
                 <Flex direction="column">
-                    <Heading as="h2" color={titleColor}> Bryan Martins </Heading>
-                    <Link href="https://google.com" target="_blank" fontSize="lg" mt={2} fontWeight="500" color={grayLightColor} > bryanmaraujo544 </Link>
-                    <Text fontSize="xl" color={grayLightColor} fontWeight="700" mt={4} > Front-end Developer | React; Next.js; JavaScript; TypeScript; SASS, TailwindCss. </Text>
+                    <Heading as="h2" color={titleColor}> {user?.name} </Heading>
+                    <Link href={`https://github.com/${user?.login}`} target="_blank" fontSize="lg" mt={2} fontWeight="500" color={grayLightColor} > {user?.login} </Link>
+                    <Text fontSize="xl" color={grayLightColor} fontWeight="700" mt={4} > {user?.bio} </Text>
                 </Flex>
 
                 {/* Languages used */}
                 <Flex direction="column">
-                    <Flex align="center" mb={4} > 
+                    <Flex align="center" mb={2} > 
                         <RiToolsFill size="24px" /> 
                         <Heading as="h3" mx={2} > Languages </Heading> 
                     </Flex>
-                    <Text fontSize="2xl" fontWeight="500" color={grayLightColor} > Javascript </Text>
-                    <Text fontSize="2xl" fontWeight="500" color={grayLightColor} my={2}> Typescript </Text>
-                    <Text fontSize="2xl" fontWeight="500" color={grayLightColor} > SCSS </Text>
+                    {user?.mostUsedLangs.map((lang: string) => (
+                        <Text fontSize="2xl" fontWeight="500" color={grayLightColor} mt={2}> {lang} </Text>
+                    ))}
                 </Flex>
 
                 {/* Main infos */}
                 <Flex direction="column" >
                     <Flex align="center" > 
                         <HiOutlineUsers size="24px" /> 
-                        <Text fontSize="xl" color={grayLightColor} fontWeight="500" mx={2} > Followers </Text> 
-                        <Text fontSize="xl" fontWeight="700" > 46 </Text> 
+                        <Link href={`https://github.com/${user?.login}?tab=followers`} target="_blank" fontSize="xl" color={grayLightColor} fontWeight="500" mx={2} > Followers </Link> 
+                        <Text fontSize="xl" fontWeight="700" > {user?.followers} </Text> 
                     </Flex>
                     <Flex align="center" mt={4}> 
                         <HiUsers size="24px" /> 
-                        <Text fontSize="xl" color={grayLightColor} fontWeight="500" mx={2} > Following </Text>
-                        <Text fontSize="xl" fontWeight="700" > 46 </Text> 
+                        <Link href={`https://github.com/${user?.login}?tab=following`} target="_blank" fontSize="xl" color={grayLightColor} fontWeight="500" mx={2} > Following </Link>
+                        <Text fontSize="xl" fontWeight="700" > {user?.following} </Text> 
                     </Flex>
                     <Flex align="center" mt={4}> 
                         <RiGitRepositoryLine size="24px" /> 
-                        <Text fontSize="xl" color={grayLightColor} fontWeight="500" mx={2} > Repositories </Text>
-                        <Text fontSize="xl" fontWeight="700" > 12 </Text> 
+                        <Link href={`https://github.com/${user?.login}?tab=repositories`} target="_blank" fontSize="xl" color={grayLightColor} fontWeight="500" mx={2} > Repositories </Link>
+                        <Text fontSize="xl" fontWeight="700" > {user?.public_repos} </Text> 
                     </Flex>
                     <Flex align="center" mt={4}> 
                         <RiStarSmileLine size="24px" /> 
-                        <Text fontSize="xl" color={grayLightColor} fontWeight="500" mx={2} > Following </Text>
-                        <Text fontSize="xl" fontWeight="700" > 46 </Text> 
+                        <Link href={`https://github.com/${user?.login}?tab=stars`} target="_blank" fontSize="xl" color={grayLightColor} fontWeight="500" mx={2} > Starred </Link>
+                        <Text fontSize="xl" fontWeight="700" > {user?.starred_repos} </Text> 
                     </Flex>
                     
                 </Flex>

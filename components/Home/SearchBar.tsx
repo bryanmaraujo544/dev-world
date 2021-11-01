@@ -15,7 +15,12 @@ type User = {
   name: string,
   login: string,
   public_repos: number,
-  starred_repos: number
+  starred_repos: number,
+  mostUsedLangs: string[],
+  followers_url: string,
+  following_url: string,
+  repos_url: string,
+  starred_url: string
 }
 
 type props = {
@@ -23,6 +28,8 @@ type props = {
   setHasError: Dispatch<SetStateAction<boolean>>
   setUser: Dispatch<SetStateAction<null | User>>
 }
+
+
 
 export const SearchBar = ({
   setIsLoading,
@@ -38,9 +45,45 @@ export const SearchBar = ({
     setNameUser(e.target.value);
   }
 
+  const getMostUsedLangs = async () => {
+    // Get the most languages used
+    const { data: repos } = await githubApi.get(`users/${nameUser}/repos`);
+
+    //  Getting the amount of time the languages was used in projects => ['js', 'js', 'ts', 'ts', 'html']
+    const langs = repos.map((repo: any) => repo.language);
+
+    // Grabbing the name of the languages used. Not the amount of projects using this language => ['js', 'ts', 'html', ...]
+    let langsName : any = [];
+    langs.forEach((lang : string) => {
+      if (!langsName.includes(lang) && lang !== null){
+        langsName.push(lang);
+      }
+    });
+
+    // An array containing arrays with the names of the languages => [['js', 'js'], ['ts', ts'], ['html']]
+    const langsSeparated = langsName.map((langName: string) => (
+      langs.filter((lang: string) => lang === langName) 
+    ));
+
+    // An array containing arrays with the name and the amount of each language
+    const langsNameAmount = langsSeparated.map((langs: any) => (
+      [langs[0], langs.length]
+    ));
+
+    const threeMostUsed = langsNameAmount
+      .sort((a: any, b: any) => b[1] - a[1]) // ordering in desc order | the greatest to lowest | 100 - 2
+      .slice(0, 3) // Grabbing the first 3
+      .map((arr: any) => arr[0]) // returning only the name of the language. Because this array contains the name and the amount
+    
+    return threeMostUsed as string[];
+  }
+
+  // Trying to get the user's information on github
   const handleSubmit = useCallback(() => {
     (async () => {
       try {
+        // Setting error to false because if one of the search get error, the next searchs be reseted
+        setHasError(false);
         setIsLoading(true);
         const { data } = await githubApi.get(`users/${nameUser}`);
 
@@ -48,8 +91,15 @@ export const SearchBar = ({
         const { data: starredRepos } = await githubApi.get(`users/${nameUser}/starred`);
         const starredAmount = starredRepos.length;
 
+        const mostUsedLangs = await getMostUsedLangs();
+
         setIsLoading(false);
-        setUser({...data, starred_repos: starredAmount});
+        setUser({
+          ...data, 
+          starred_repos: starredAmount,
+          mostUsedLangs
+        });
+        
       } catch (err) {
         console.log(err);
         setHasError(true);
