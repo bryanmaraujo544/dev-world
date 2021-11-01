@@ -89,8 +89,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
           {/* Bio */}
           <Flex direction="column">
             <Heading as="h2" color={titleColor}>
-              {' '}
-              {user?.name}{' '}
+              {user?.name}
             </Heading>
             <Link
               href={`https://github.com/${user?.login}`}
@@ -100,12 +99,10 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
               fontWeight="500"
               color={grayLightColor}
             >
-              {' '}
-              {user?.login}{' '}
+              {user?.login}
             </Link>
             <Text fontSize="xl" color={grayLightColor} fontWeight="700" mt={4}>
-              {' '}
-              {user?.bio}{' '}
+              {user?.bio}
             </Text>
           </Flex>
 
@@ -114,8 +111,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
             <Flex align="center" mb={2}>
               <RiToolsFill size="24px" />
               <Heading as="h3" mx={2}>
-                {' '}
-                Languages{' '}
+                Languages
               </Heading>
             </Flex>
             {user?.mostUsedLangs.map((lang: string) => (
@@ -125,8 +121,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
                 color={grayLightColor}
                 mt={2}
               >
-                {' '}
-                {lang}{' '}
+                {lang}
               </Text>
             ))}
           </Flex>
@@ -143,12 +138,10 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
                 fontWeight="500"
                 mx={2}
               >
-                {' '}
-                Followers{' '}
+                Followers
               </Link>
               <Text fontSize="xl" fontWeight="700">
-                {' '}
-                {user?.followers}{' '}
+                {user?.followers}
               </Text>
             </Flex>
             <Flex align="center" mt={4}>
@@ -161,12 +154,10 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
                 fontWeight="500"
                 mx={2}
               >
-                {' '}
-                Following{' '}
+                Following
               </Link>
               <Text fontSize="xl" fontWeight="700">
-                {' '}
-                {user?.following}{' '}
+                {user?.following}
               </Text>
             </Flex>
             <Flex align="center" mt={4}>
@@ -179,12 +170,10 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
                 fontWeight="500"
                 mx={2}
               >
-                {' '}
-                Repositories{' '}
+                Repositories
               </Link>
               <Text fontSize="xl" fontWeight="700">
-                {' '}
-                {user?.public_repos}{' '}
+                {user?.public_repos}
               </Text>
             </Flex>
             <Flex align="center" mt={4}>
@@ -197,12 +186,10 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
                 fontWeight="500"
                 mx={2}
               >
-                {' '}
-                Starred{' '}
+                Starred
               </Link>
               <Text fontSize="xl" fontWeight="700">
-                {' '}
-                {user?.starred_repos}{' '}
+                {user?.starred_repos}
               </Text>
             </Flex>
           </Flex>
