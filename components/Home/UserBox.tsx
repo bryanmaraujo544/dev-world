@@ -126,6 +126,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
                 fontWeight="500"
                 color={grayLightColor}
                 mt={2}
+                key={lang}
               >
                 {lang}
               </Text>
