@@ -50,6 +50,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
       minHeight="220px"
       justifyContent="center"
       alignItems="center"
+      boxShadow="inner"
     >
       {isLoading ? (
         <Flex gridColumn="1 / 5" justify="center">

@@ -127,7 +127,7 @@ export const SearchBar = ({ setIsLoading, setUser, setHasError }: props) => {
         fontWeight="700"
         fontSize="2xl"
         border="none"
-        boxShadow="sm"
+        boxShadow="inner"
         mr={4}
         onChange={(e) => handleInput(e)}
       />
