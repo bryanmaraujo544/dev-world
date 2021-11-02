@@ -18,34 +18,27 @@ export const SocialAuth = () => {
                 }
             }}
         >
-            <Flex w="100%" mt={8} align="center" justify="stretch">
-                <Box w="100%" h="3px" bg="gray.300" rounded="999px"></Box>
-                <Text w="100%" textAlign="center" mx={5} color="gray.300" fontWeight="700" >or continue with</Text>
-                <Box w="100%" h="3px" bg="gray.300" rounded="999px" ></Box>
+            <Flex w="100%" mt={10} align="center" justify="stretch">
+                <Box w="100%" h="3px" bg="gray.400" rounded="999px"></Box>
+                <Text w="100%" textAlign="center" color="gray.400" fontSize="xl" fontWeight="700" >or continue with</Text>
+                <Box w="100%" h="3px" bg="gray.400" rounded="999px" ></Box>
             </Flex>
 
-            <Flex justify="center" mt={8}>
-                <MotionBox
-                    px={8} py={4}
-                    border="2px"
-                    borderColor={borderColor}
-                    cursor="pointer"
-                    rounded="16px"
-                    mr={4}
-                    whileHover={{ scale: 1.05 }}
-                >
-                    <AiFillGithub size="32px" color={colorMode === 'dark' ? 'white' : 'black'} />
-                </MotionBox>
-                <MotionBox
-                    px={8} py={4}
-                    border="2px"
-                    borderColor={borderColor}
+            <Flex mt={10} justify="center">
+                <MotionFlex
+                    align="center"
+                    justify="center"
+                    bg={colorMode === 'light' ? 'black' : 'white'}
+                    px={8} py={3}
                     cursor="pointer"
                     rounded="16px"
                     whileHover={{ scale: 1.05 }}
+                    w="100%"
                 >
-                    <FcGoogle size="32px" />
-                </MotionBox>
+                    <Text  color={colorMode === 'light' ? 'white' : 'black'} fontSize="xl" fontWeight="700" mr={4}>Login with Github</Text>
+                   
+                    <AiFillGithub size="32px" color={colorMode === 'light' ? 'white' : 'black'} />
+                </MotionFlex>
             </Flex>
         </MotionFlex>
     )
