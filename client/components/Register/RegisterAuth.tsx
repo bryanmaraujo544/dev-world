@@ -1,19 +1,22 @@
-import { forwardRef, useEffect } from 'react';
+import { forwardRef, useEffect, useCallback } from 'react';
 import { SocialAuth } from '.././SocialAuth';
 import { Button } from '.././Button';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
-import {
-  MotionInput,
-  MotionFormControl,
-  MotionFlex,
-} from '../../utils/getMotionComponents';
+import { MotionInput, MotionFlex } from '../../utils/getMotionComponents';
 import {
   xRightAnimationVariants,
   fastContainerVariants,
 } from '../../animations/fadeIn';
+
+type FormTypes = {
+  name: string;
+  githubUsername: string;
+  email: string;
+  password: string;
+};
 
 export const RegisterAuth = () => {
   const inputBg = useDarkLightColors('gray.100', 'gray.700');
@@ -24,14 +27,23 @@ export const RegisterAuth = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: any) => console.log(data);
 
-  // useEffect(() => {
-  //   const hasRequiredError = Object.values(errors).some(obj => obj.type === 'required');
-  //   if (hasRequiredError) {
-  //     toast.error('All fields are necessary :(');
-  //   }
-  // }, [errors]);
+  const onSubmit: SubmitHandler<FormTypes> = (
+    { name, githubUsername, email, password },
+    e
+  ) => {
+    e?.preventDefault();
+    console.log({ name, githubUsername, email, password });
+  };
+
+  const handleRequiredError = () => {
+    const hasRequiredError = Object.values(errors).some(
+      (obj) => obj.type === 'required'
+    );
+    if (hasRequiredError) {
+      toast.error('All fields are necessary');
+    }
+  };
 
   const Input = forwardRef((props: any, ref: any) => (
     <MotionInput
@@ -74,8 +86,12 @@ export const RegisterAuth = () => {
           placeholder="Enter your password"
           {...register('password', { required: true })}
         />
-        
-        <Button type="submit" variants={xRightAnimationVariants}>
+
+        <Button
+          type="submit"
+          variants={xRightAnimationVariants}
+          onClick={handleRequiredError}
+        >
           Sign Up
         </Button>
       </motion.form>
