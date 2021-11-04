@@ -5,18 +5,14 @@ import { useDarkLightColors } from '../hooks/useDarkLightColors';
 import { Header } from '../components/Header';
 
 export const Register: NextPage = () => {
-    const colorMode = useDarkLightColors('bg.light', 'bg.dark');
+  const colorMode = useDarkLightColors('bg.light', 'bg.dark');
 
-    return (
-        <Box
-            px={[8, 12, 16, 20, 24]}
-            bg={colorMode}
-            h={['100%', null, null, '100vh']}
-        >
-            <Header />
-            <RegisterSection />
-        </Box>
-    )
-}
+  return (
+    <Box px={[8, 12, 16, 20, 24]} bg={colorMode} h="100%">
+      <Header />
+      <RegisterSection />
+    </Box>
+  );
+};
 
 export default Register;
