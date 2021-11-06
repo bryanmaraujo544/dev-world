@@ -33,8 +33,6 @@ export const LoginAuth = () => {
   // Function wich will receive the data from form.
   // the func is passed inside of one func of reac-hook-form
   const onSubmit: SubmitHandler<FormTypes> = ({ email, password }, e) => {
-    // // e?.preventDefault();
-    // console.log(e);
     console.log({ email, password });
   };
 
