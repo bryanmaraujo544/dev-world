@@ -1,9 +1,9 @@
 CREATE DATABASE devworld;
 
-CREATE EXTENSION "uuid-ossp";
+USE devworld;
 
 CREATE TABLE IF NOT EXISTS users (
-  id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+  id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR NOT NULL,
   github_username VARCHAR NOT NULL,
   email VARCHAR NOT NULL,

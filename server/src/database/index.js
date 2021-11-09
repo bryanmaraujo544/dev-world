@@ -1,16 +1,18 @@
-const { Client } = require('pg');
+const mysql = require('mysql');
 
-const client = new Client({
+const client = mysql.createPool({
   host: 'localhost',
-  port: 5432,
   user: 'root',
   password: 'root',
   database: 'devworld'
 });
 
-client.connect();
-
+// module.exports = client;
 exports.query = async (query, values) => {
-  const { rows } = await client.query(query, values);
-  return rows;
+  let result = {err: null, res: []};
+  client.query(query, values, (err, res) => {
+    if (err) result.err = err;
+    else result.res = res;
+  });
+  return result;
 }
