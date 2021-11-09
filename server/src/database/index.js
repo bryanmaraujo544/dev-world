@@ -10,9 +10,10 @@ const client = mysql.createPool({
 // module.exports = client;
 exports.query = async (query, values) => {
   let result = {err: null, res: []};
-  client.query(query, values, (err, res) => {
-    if (err) result.err = err;
+  client.query('oi', values, (err, res) => {
+    if (err) result.err = err.message;
     else result.res = res;
+    console.log({ result });
   });
   return result;
 }
