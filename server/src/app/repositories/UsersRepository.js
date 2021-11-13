@@ -2,12 +2,12 @@ const db = require('../../database');
 
 class UsersRepository {
   async findAll() {
-    const rows = await db.query(`
-      SELECT * 
-      FROM users
-    `);
-    
-    return rows;
+    const users = await db.query('SELECT * FROM users');
+    return users;
+  }
+
+  async findByUsername(username) {
+  
   }
 };
 
