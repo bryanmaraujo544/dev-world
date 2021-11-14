@@ -33,9 +33,22 @@ export const RegisterAuth = () => {
     { name, githubUsername, email, password },
     e
   ) => {
-    console.log({ name, githubUsername, email, password });
     e?.preventDefault();
-    serverApi.post('/users', { name, githubUsername, email, password });
+
+    try {
+      serverApi
+        .post('/users', {
+          name,
+          githubUsername,
+          email,
+          password,
+        })
+        .then(({ data }) => {
+          toast.success(data.message);
+        });
+    } catch (err) {
+      console.log({ err });
+    }
   };
 
   const handleRequiredError = () => {
@@ -88,7 +101,6 @@ export const RegisterAuth = () => {
           placeholder="Enter your password"
           {...register('password', { required: true })}
         />
-
         <Button
           type="submit"
           variants={xRightAnimationVariants}

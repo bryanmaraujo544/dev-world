@@ -17,7 +17,7 @@ class UserController {
     }
 
     const user = await UsersRepository.create({ name, github_username: githubUsername, email, password });
-    res.json(user);
+    res.json({ message: "User created" });
   }
 
 
