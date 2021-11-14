@@ -6,8 +6,28 @@ class UsersRepository {
     return users;
   }
 
-  async findByUsername(username) {
-  
+  async create({
+    name,
+    github_username,
+    email,
+    password
+  }) {
+    const userCreated = await db.query(`
+      INSERT INTO users(name, github_username, email, password)
+      VALUES (?, ?, ?, ?);
+      
+    `, [name, github_username, email, password]);
+
+    return userCreated;
+  }
+
+  async findByGithubUsername(username) {
+    const [user] = await db.query(`
+      SELECT * FROM users
+      WHERE github_username = ?
+    `, [username]);
+    
+    return user;
   }
 };
 
