@@ -3,16 +3,21 @@ import { TextSectionAuth } from '../TextSectionAuth';
 import { LoginAuth } from './LoginAuth';
 
 const Login = () => {
-    return (
-        <Grid templateColumns={['1fr', '1fr', '1fr', '1fr 0.75fr']}w="100%" gap={16} mt={[6, null, null, 12, 24]}>
-            <TextSectionAuth
-                title="Sign in to find new developers"
-                subtitle="If you do not have an account"
-                linkText="Register Here."
-            />
-            <LoginAuth />
-        </Grid>
-    )
-}
+  return (
+    <Grid
+      templateColumns={['1fr', '1fr', '1fr', '1fr 0.75fr']}
+      w="100%"
+      gap={16}
+      mt={[6, null, null, 12, 24]}
+    >
+      <TextSectionAuth
+        title="Sign in to find new developers"
+        subtitle="If you do not have an account"
+        linkText="Register Here."
+      />
+      <LoginAuth />
+    </Grid>
+  );
+};
 
 export default Login;

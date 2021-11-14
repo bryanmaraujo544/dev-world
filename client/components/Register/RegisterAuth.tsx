@@ -78,7 +78,7 @@ export const RegisterAuth = () => {
   ));
 
   return (
-    <MotionFlex mb={[12, null, null, 0]} direction="column">
+    <MotionFlex direction="column" mb={24}>
       <motion.form
         variants={fastContainerVariants}
         initial="hidden"
@@ -86,7 +86,7 @@ export const RegisterAuth = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
-          plaaeholder="Enter your name..."
+          placeholder="Enter your name..."
           {...register('name', { required: true })}
         />
         <Input

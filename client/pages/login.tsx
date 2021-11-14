@@ -9,7 +9,7 @@ const Login: NextPage = () => {
 
   return (
     <Box
-      maxHeight="100vh"
+      minHeight="100vh"
       maxWidth="100vw"
       overflow="hidden"
       bg={colorMode}
