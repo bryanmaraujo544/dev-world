@@ -10,6 +10,7 @@ import {
   xRightAnimationVariants,
   fastContainerVariants,
 } from '../../animations/fadeIn';
+import { serverApi } from '../../services/serverApi';
 
 type FormTypes = {
   name: string;
@@ -28,12 +29,13 @@ export const RegisterAuth = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit: SubmitHandler<FormTypes> = (
+  const onSubmit: SubmitHandler<FormTypes> = async (
     { name, githubUsername, email, password },
     e
   ) => {
-    e?.preventDefault();
     console.log({ name, githubUsername, email, password });
+    e?.preventDefault();
+    serverApi.post('/users', { name, githubUsername, email, password });
   };
 
   const handleRequiredError = () => {
@@ -71,7 +73,7 @@ export const RegisterAuth = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
-          placeholder="Enter your name..."
+          plaaeholder="Enter your name..."
           {...register('name', { required: true })}
         />
         <Input

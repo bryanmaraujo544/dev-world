@@ -15,7 +15,6 @@ class UsersRepository {
     const userCreated = await db.query(`
       INSERT INTO users(name, github_username, email, password)
       VALUES (?, ?, ?, ?);
-      
     `, [name, github_username, email, password]);
 
     return userCreated;

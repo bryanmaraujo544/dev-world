@@ -7,17 +7,17 @@ class UserController {
   }
 
   async store(req, res) {
-    const { name, github_username, email, password } = req.body;
+    const { name, githubUsername, email, password } = req.body;
+    console.log(name, githubUsername, email, password);
 
-    const userExists = await UsersRepository.findByGithubUsername(github_username);
+    const userExists = await UsersRepository.findByGithubUsername(githubUsername);
 
     if (userExists) {
       return res.status(400).json({ error: 'This email already exists' });
     }
-    
-    const user = await UsersRepository.create({ name, github_username, email, password });
-    res.json(user);
 
+    const user = await UsersRepository.create({ name, github_username: githubUsername, email, password });
+    res.json(user);
   }
 
 
