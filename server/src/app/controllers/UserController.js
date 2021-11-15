@@ -14,7 +14,7 @@ class UserController {
     const emailExists = await UsersRepository.findByEmail(email);
 
     if (githubUsernameExists || emailExists) {
-      return res.status(400).json({ error: 'This githubUsername or email already exists' });
+      return res.status(400).json({ message: 'This githubUsername or email already exists' });
     }
 
     const user = await UsersRepository.create({ name, github_username: githubUsername, email, password });

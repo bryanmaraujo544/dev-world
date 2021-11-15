@@ -10,22 +10,20 @@ class AuthController {
     const user = await AuthRepository.findByEmail(email);
 
     if (!user) {
-      return res.status(400).json({ message: "It doesn't exists a user with this email" });
+      return res.status(400).json({ message: "It doesn't exists a user with this email", token: null });
     }
 
+    // Grabbing the password of the user that is encrypted from the database
     const passwordEncrypted = user.password;
     const isPasswordCorrect = await bcrypt.compare(password, passwordEncrypted);
     
+    // If the password given by user is different from the password of the user with the email provided...
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Incorrect password" });
+      return res.status(400).json({ message: "Incorrect password", token: null });
     }
 
-    createToken();
-    res.send("Everything okay, let's to the next step");
-
-
-
-    // If everything is correct, I create a jwt with the information and send to front end
+    const token = createToken(user);
+    res.status(500).json({ message: "User logged-in", token });
   }
 }
 
