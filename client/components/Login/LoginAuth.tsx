@@ -1,4 +1,5 @@
 import { serverApi } from '../../services/serverApi';
+import { setCookie } from 'nookies';
 import { forwardRef, RefAttributes } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Button } from '.././Button';
@@ -39,11 +40,15 @@ export const LoginAuth = () => {
         email,
         password,
       });
-      console.log({ data });
+      const token = data.token;
+      setCookie(null, '@token', token, {
+        maxAge: 30 * 24 * 60 * 60,
+      });
+
       toast.success(data.message);
     } catch (err: any) {
       const response = err.response?.data;
-      toast.error(response.message);
+      toast.error(response?.message);
     }
   };
 
