@@ -14,17 +14,10 @@ class UsersRepository {
     password
   }) {
     const encryptedPassword = await bcrypt.hash(password, 10);
-<<<<<<< HEAD
-
+    
     const userCreated = await db.query(`
       INSERT INTO users(name, github_username, email, password)
       VALUES (?, ?, ?, ?);
-=======
-    
-    const userCreated = await db.query(`
-    INSERT INTO users(name, github_username, email, password)
-    VALUES (?, ?, ?, ?);
->>>>>>> 401c126457743b52800a1866fd3923a6cbb14e3b
     `, [name, github_username, email, encryptedPassword]);
 
     return userCreated;
