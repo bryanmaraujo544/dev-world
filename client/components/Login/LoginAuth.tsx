@@ -1,3 +1,4 @@
+import { serverApi } from '../../services/serverApi';
 import { forwardRef, RefAttributes } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Button } from '.././Button';
@@ -32,8 +33,18 @@ export const LoginAuth = () => {
 
   // Function wich will receive the data from form.
   // the func is passed inside of one func of reac-hook-form
-  const onSubmit: SubmitHandler<FormTypes> = ({ email, password }, e) => {
-    console.log({ email, password });
+  const onSubmit: SubmitHandler<FormTypes> = async ({ email, password }, e) => {
+    try {
+      const { data } = await serverApi.post('/auth/login', {
+        email,
+        password,
+      });
+      console.log({ data });
+      toast.success(data.message);
+    } catch (err: any) {
+      const response = err.response?.data;
+      toast.error(response.message);
+    }
   };
 
   // Every the submit button is clicked this function is runned
@@ -46,22 +57,6 @@ export const LoginAuth = () => {
     }
   };
 
-  const Input = forwardRef((props: any, ref: any) => (
-    <MotionInput
-      ref={ref}
-      variants={xRightAnimationVariants}
-      boxShadow="inner"
-      p={10}
-      bg={inputBg}
-      border="none"
-      fontSize="xl"
-      fontWeight="bold"
-      color={inputColor}
-      rounded="16px"
-      {...props}
-    />
-  ));
-
   return (
     <Flex
       onSubmit={handleSubmit(onSubmit)}
@@ -73,14 +68,34 @@ export const LoginAuth = () => {
         initial="hidden"
         animate="show"
       >
-        <Input
+        <MotionInput
+          variants={xRightAnimationVariants}
+          boxShadow="inner"
+          p={10}
+          bg={inputBg}
+          border="none"
+          fontSize="xl"
+          fontWeight="bold"
+          color={inputColor}
+          rounded="16px"
           placeholder="Enter your email"
           {...register('email', { required: true })}
+          type="email"
         />
-        <Input
+        <MotionInput
+          variants={xRightAnimationVariants}
+          boxShadow="inner"
+          p={10}
+          bg={inputBg}
+          border="none"
+          fontSize="xl"
+          fontWeight="bold"
+          color={inputColor}
+          rounded="16px"
           placeholder="Enter your password"
           mt={4}
           {...register('password', { required: true })}
+          type="password"
         />
         <Button type="submit" onClick={handleRequiredError}>
           Sign In

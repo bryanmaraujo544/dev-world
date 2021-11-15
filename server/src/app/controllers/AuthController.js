@@ -5,6 +5,7 @@ const createToken = require('../utils/createToken');
 class AuthController {
   async login(req, res) {
     const { email, password } = req.body;
+    console.log(email, password);
 
     // Check if there is some user with this email
     const user = await AuthRepository.findByEmail(email);
@@ -23,7 +24,7 @@ class AuthController {
     }
 
     const token = createToken(user);
-    res.status(500).json({ message: "User logged-in", token });
+    res.send({ message: "User logged-in", token });
   }
 }
 
