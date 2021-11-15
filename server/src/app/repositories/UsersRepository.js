@@ -1,4 +1,5 @@
 const db = require('../../database');
+const bcrypt = require('bcrypt');
 
 class UsersRepository {
   async findAll() {
@@ -12,10 +13,12 @@ class UsersRepository {
     email,
     password
   }) {
+    const encryptedPassword = await bcrypt.hash(password, 10);
+
     const userCreated = await db.query(`
       INSERT INTO users(name, github_username, email, password)
       VALUES (?, ?, ?, ?);
-    `, [name, github_username, email, password]);
+    `, [name, github_username, email, encryptedPassword]);
 
     return userCreated;
   }
