@@ -36,6 +36,7 @@ export const LoginAuth = () => {
     console.log({ email, password });
   };
 
+  // Every the submit button is clicked this function is runned
   const handleRequiredError = () => {
     const hasRequiredError = Object.values(errors).some(
       (obj) => obj.type === 'required'
