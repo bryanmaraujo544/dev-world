@@ -1,6 +1,7 @@
 import { serverApi } from '../../services/serverApi';
 import { setCookie } from 'nookies';
-import { forwardRef, RefAttributes } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Flex } from '@chakra-ui/react';
 import { Button } from '.././Button';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
@@ -26,6 +27,8 @@ export const LoginAuth = () => {
   const inputBg = useDarkLightColors('gray.100', 'gray.800');
   const inputColor = useDarkLightColors('text.600', 'gray.500');
 
+  const { signIn } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -35,21 +38,7 @@ export const LoginAuth = () => {
   // Function wich will receive the data from form.
   // the func is passed inside of one func of reac-hook-form
   const onSubmit: SubmitHandler<FormTypes> = async ({ email, password }, e) => {
-    try {
-      const { data } = await serverApi.post('/auth/login', {
-        email,
-        password,
-      });
-      const token = data.token;
-      setCookie(null, '@token', token, {
-        maxAge: 30 * 24 * 60 * 60,
-      });
-
-      toast.success(data.message);
-    } catch (err: any) {
-      const response = err.response?.data;
-      toast.error(response?.message);
-    }
+    signIn({ email, password });
   };
 
   // Every the submit button is clicked this function is runned
