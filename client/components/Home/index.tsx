@@ -23,6 +23,7 @@ type User = {
 
 export const Home = ({ token }: Record<string, string>) => {
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
+
   const [user, setUser] = useState<null | User>(null);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

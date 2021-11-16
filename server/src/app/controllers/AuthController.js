@@ -1,6 +1,8 @@
 const AuthRepository = require('../repositories/AuthRepository');
 const bcrypt = require('bcrypt');
 const createToken = require('../utils/createToken');
+const jwt = require('jsonwebtoken');
+
 
 class AuthController {
   async login(req, res) {
@@ -29,7 +31,13 @@ class AuthController {
 
   async show(req, res) {
     const { authorization } = req.headers;
-    console.log({ authorization });
+
+    const token = authorization.split(' ')[1];
+    console.log({ token });
+
+    const userInfos = jwt.decode(token);
+    console.log({ userInfos });
+
   }
 }
 

@@ -4,9 +4,11 @@ import {
   useCallback,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react';
+import jwt from 'jsonwebtoken';
 import { githubApi } from '../../services/githubApi';
-
+import { parseCookies } from 'nookies';
 import { Flex, Input } from '@chakra-ui/react';
 import { MotionFlex } from '../../utils/getMotionComponents';
 import { BiSearchAlt } from 'react-icons/bi';
@@ -30,17 +32,25 @@ type User = {
   starred_url: string;
 };
 
-type props = {
+type Props = {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setHasError: Dispatch<SetStateAction<boolean>>;
   setUser: Dispatch<SetStateAction<null | User>>;
 };
 
-export const SearchBar = ({ setIsLoading, setUser, setHasError }: props) => {
+type UserJWT = {
+  name: string | null;
+  githubUsername: string | null;
+  iat: number | null;
+};
+
+export const SearchBar = ({ setIsLoading, setUser, setHasError }: Props) => {
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
 
-  const [nameUser, setNameUser] = useState('');
+  const { '@token': token } = parseCookies();
+  const userInfos = jwt.decode(token);
+  const [nameUser, setNameUser] = useState(userInfos?.githubUsername || '');
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setNameUser(e.target.value);
@@ -114,6 +124,11 @@ export const SearchBar = ({ setIsLoading, setUser, setHasError }: props) => {
       }
     })();
   }, [nameUser]);
+
+  // Running this function in the first time in order to use the githubUsername from logged user
+  useEffect(() => {
+    handleSubmit();
+  }, []);
 
   return (
     <Flex h={['60px', null, null, null, '75px']}>

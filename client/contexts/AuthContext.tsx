@@ -3,6 +3,8 @@ import { serverApi } from '../services/serverApi';
 import { setCookie, parseCookies } from 'nookies';
 import { toast } from 'react-toastify';
 
+type User = {};
+
 type SignInTypes = {
   email: string;
   password: string;
@@ -15,11 +17,13 @@ type AuthTypes = {
 export const AuthContext = createContext({} as AuthTypes);
 
 export function AuthProvider({ children }: any) {
+  // const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     (async () => {
       const { '@token': token } = parseCookies();
 
       if (token) {
+        console.log('there is token');
         // getting the user's information based on the jwt that is been sending throug headers;
         // We defined that every axios request has the header containing the jwt
         const { data } = await serverApi('/auth/profile');
