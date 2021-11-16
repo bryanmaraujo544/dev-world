@@ -1,6 +1,6 @@
-import { createContext, ReactNode } from 'react';
+import { createContext, ReactNode, useEffect } from 'react';
 import { serverApi } from '../services/serverApi';
-import { setCookie } from 'nookies';
+import { setCookie, parseCookies } from 'nookies';
 import { toast } from 'react-toastify';
 
 type SignInTypes = {
@@ -15,6 +15,19 @@ type AuthTypes = {
 export const AuthContext = createContext({} as AuthTypes);
 
 export function AuthProvider({ children }: any) {
+  useEffect(() => {
+    (async () => {
+      const { '@token': token } = parseCookies();
+
+      if (token) {
+        // getting the user's information based on the jwt that is been sending throug headers;
+        // We defined that every axios request has the header containing the jwt
+        const { data } = await serverApi('/auth/profile');
+        console.log({ data });
+      }
+    })();
+  }, []);
+
   const signIn = async ({ email, password }: SignInTypes) => {
     try {
       const { data } = await serverApi.post('/auth/login', {
@@ -25,6 +38,8 @@ export function AuthProvider({ children }: any) {
       setCookie(null, '@token', token, {
         maxAge: 30 * 24 * 60 * 60,
       });
+
+      serverApi.defaults.headers['Authorization'] = `Bearer ${token}`;
       toast.success(data.message);
     } catch (err: any) {
       const response = err.response?.data;

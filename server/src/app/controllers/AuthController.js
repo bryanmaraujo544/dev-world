@@ -26,6 +26,11 @@ class AuthController {
     const token = createToken(user);
     res.send({ message: "User logged-in", token });
   }
+
+  async show(req, res) {
+    const { authorization } = req.headers;
+    console.log({ authorization });
+  }
 }
 
 module.exports = new AuthController;

@@ -38,7 +38,7 @@ export const LoginAuth = () => {
   // Function wich will receive the data from form.
   // the func is passed inside of one func of reac-hook-form
   const onSubmit: SubmitHandler<FormTypes> = async ({ email, password }, e) => {
-    signIn({ email, password });
+    await signIn({ email, password });
   };
 
   // Every the submit button is clicked this function is runned
