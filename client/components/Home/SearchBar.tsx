@@ -13,8 +13,8 @@ import { Flex, Input } from '@chakra-ui/react';
 import { MotionFlex } from '../../utils/getMotionComponents';
 import { BiSearchAlt } from 'react-icons/bi';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
-
 import { toast } from 'react-toastify';
+
 
 type User = {
   avatar_url: string;
@@ -125,6 +125,10 @@ export const SearchBar = ({ setIsLoading, setUser, setHasError }: Props) => {
     })();
   }, [nameUser]);
 
+  const handleEnterKey = (e: KeyboardEventHandler<HTMLInputElement>) => {
+
+  }
+
   // Running this function in the first time in order to use the githubUsername from logged user
   useEffect(() => {
     handleSubmit();
@@ -145,6 +149,7 @@ export const SearchBar = ({ setIsLoading, setUser, setHasError }: Props) => {
         boxShadow="inner"
         mr={4}
         onChange={(e) => handleInput(e)}
+        onKeyDown={handleEnterKey}
       />
       <MotionFlex
         h="100%"

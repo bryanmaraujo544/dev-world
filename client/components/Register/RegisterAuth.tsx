@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { forwardRef, useEffect, useCallback } from 'react';
 import { SocialAuth } from '.././SocialAuth';
 import { Button } from '.././Button';
@@ -23,6 +24,8 @@ export const RegisterAuth = () => {
   const inputBg = useDarkLightColors('gray.100', 'gray.700');
   const inputColor = useDarkLightColors('text.600', 'gray.500');
 
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -36,16 +39,15 @@ export const RegisterAuth = () => {
     e?.preventDefault();
 
     try {
-      serverApi
-        .post('/users', {
-          name,
-          githubUsername,
-          email,
-          password,
-        })
-        .then(({ data }) => {
-          toast.success(data.message);
-        });
+      const { data } = await serverApi.post('/users', {
+        name,
+        githubUsername,
+        email,
+        password,
+      });
+      toast.success(data.message);
+      router.push('/login');
+
     } catch (err) {
       console.log({ err });
     }
@@ -100,6 +102,7 @@ export const RegisterAuth = () => {
         <Input
           placeholder="Enter your password"
           {...register('password', { required: true })}
+          type="password"
         />
         <Button
           type="submit"
