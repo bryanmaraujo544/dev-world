@@ -17,8 +17,8 @@ class AuthController {
     }
 
     // Grabbing the password of the user that is encrypted from the database
-    const passwordEncrypted = user.password;
-    const isPasswordCorrect = await bcrypt.compare(password, passwordEncrypted);
+    const passwordHashed = user.password;
+    const isPasswordCorrect = await bcrypt.compare(password, passwordHashed);
     
     // If the password given by user is different from the password of the user with the email provided...
     if (!isPasswordCorrect) {

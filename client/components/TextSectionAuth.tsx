@@ -62,7 +62,7 @@ export const TextSectionAuth = ({
 
      return (
           <MotionFlex direction="column" align={['center', 'center', 'center', 'start']} variants={slowContainerVariants} initial="hidden" animate="show" >
-               <MotionHeading variants={xAnimationVariants} maxWidth={['400px', null, '450px', '600px', '800px']} textAlign={["center", null, null, 'left']} fontFamily="fonts.poppins" as="h1" fontSize={['32px', '36px', '38px', '42px', '64px']} fontWeight="900" lineHeight={1.3}> 
+               <MotionHeading variants={xAnimationVariants} maxWidth={['400px', null, '450px', '600px', '800px']} textAlign={["center", null, null, 'left']} fontFamily="fonts.poppins" as="h1" fontSize={['32px', '36px', '38px', '42px', '56px']} fontWeight="900" lineHeight={1.3}> 
                     {title}
                </MotionHeading>
                <MotionText variants={xAnimationVariants} textAlign={["center", null, null, 'left']} fontSize="2xl" fontWeight="500" color={grayColor} mt={2} mr={1}>

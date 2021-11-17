@@ -1,5 +1,6 @@
 import { serverApi } from '../../services/serverApi';
 import { setCookie } from 'nookies';
+import { useRouter } from 'next/router';
 // import jwt from 'jsonwebtoken';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -25,6 +26,7 @@ type FormTypes = {
 };
 
 export const LoginAuth = () => {
+  const router = useRouter();
   const inputBg = useDarkLightColors('gray.100', 'gray.800');
   const inputColor = useDarkLightColors('text.600', 'gray.500');
 
@@ -40,6 +42,7 @@ export const LoginAuth = () => {
   // the func is passed inside of one func of reac-hook-form
   const onSubmit: SubmitHandler<FormTypes> = async ({ email, password }, e) => {
     await signIn({ email, password });
+    router.push('/');
   };
 
   // Every the submit button is clicked this function is runned
