@@ -15,7 +15,6 @@ import { BiSearchAlt } from 'react-icons/bi';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
 import { toast } from 'react-toastify';
 
-
 type User = {
   avatar_url: string;
   bio: string;
@@ -125,9 +124,11 @@ export const SearchBar = ({ setIsLoading, setUser, setHasError }: Props) => {
     })();
   }, [nameUser]);
 
-  const handleEnterKey = (e: KeyboardEventHandler<HTMLInputElement>) => {
-
-  }
+  const handleEnterKey = (e: any) => {
+    if (e.keyCode === 13) {
+      handleSubmit();
+    }
+  };
 
   // Running this function in the first time in order to use the githubUsername from logged user
   useEffect(() => {
