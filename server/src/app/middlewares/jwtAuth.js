@@ -6,7 +6,7 @@ function jwtAuth (req, res, next) {
   console.log({ authorization });
 
   if (!authorization) {
-    return res.status(401).json({ message: 'there is no token', auth: false });
+    return res.json({ message: 'there is no token', auth: false });
   }
 
   const token = authorization?.split(' ')[1];

@@ -24,23 +24,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     serverApi.defaults.headers['Authorization'] = `Bearer ${token}`;
   }
 
-  try {
-    const {
-      data: { auth },
-    } = await serverApi.get('auth');
+  const { data } = await serverApi.get('auth');
 
-    console.log({ auth });
-
-    if (!auth) {
-      return {
-        redirect: {
-          destination: '/login',
-          permanent: false,
-        },
-      };
-    }
-  } catch (err) {
-    console.log('Happened an error in index page', err);
+  if (!data.auth) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
   }
 
   return {

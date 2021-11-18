@@ -38,6 +38,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
   const titleColor = useDarkLightColors('text.light', 'text.dark');
+  const bgColor = useDarkLightColors('bg.light', 'bg.dark');
 
   return (
     <Grid
@@ -76,11 +77,13 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
             position="relative"
             w="100%"
             h={['120px', null, null, null, '100%']}
+            rounded="16px"
             sx={{
               '.profile-img': {
                 borderRadius: '16px',
               },
             }}
+            bg={bgColor}
           >
             <Image
               src={
@@ -94,7 +97,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
           </Box>
 
           {/* Bio */}
-          <Flex direction="column">
+          <Flex direction="column" h="100%" justify="flex-start">
             <Heading as="h2" color={titleColor}>
               {user?.name}
             </Heading>
@@ -114,7 +117,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
           </Flex>
 
           {/* Languages used */}
-          <Flex direction="column">
+          <Flex direction="column" h="100%" justify="flex-start">
             <Flex align="center" mb={2}>
               <RiToolsFill size="24px" />
               <Heading as="h3" mx={2}>
