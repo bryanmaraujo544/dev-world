@@ -7,6 +7,7 @@ const router = Router();
 router.get('/users', jwtAuth, UserController.index);
 router.post('/users', UserController.store);
 
+router.get('/auth', jwtAuth);
 router.get('/auth/profile', AuthController.show);
 router.post('/auth/login', AuthController.login);
 

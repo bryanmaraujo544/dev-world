@@ -18,16 +18,30 @@ const Home = (props: propTypes) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = nookies.get(context);
   const token = cookies['@token'];
+  console.log({ token });
 
-  if (!token) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false
-      }
-    }
+  if (token) {
+    serverApi.defaults.headers['Authorization'] = `Bearer ${token}`;
   }
 
+  try {
+    const {
+      data: { auth },
+    } = await serverApi.get('auth');
+
+    console.log({ auth });
+
+    if (!auth) {
+      return {
+        redirect: {
+          destination: '/login',
+          permanent: false,
+        },
+      };
+    }
+  } catch (err) {
+    console.log('Happened an error in index page', err);
+  }
 
   return {
     props: {

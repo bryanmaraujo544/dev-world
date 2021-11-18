@@ -124,6 +124,7 @@ export const SearchBar = ({ setIsLoading, setUser, setHasError }: Props) => {
     })();
   }, [nameUser]);
 
+  // When the user press enter key the search is made
   const handleEnterKey = (e: any) => {
     if (e.keyCode === 13) {
       handleSubmit();

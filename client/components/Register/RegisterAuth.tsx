@@ -45,9 +45,9 @@ export const RegisterAuth = () => {
         email,
         password,
       });
-      toast.success(data.message);
-      router.push('/login');
 
+      await toast.success(data.message);
+      router.push('/login');
     } catch (err) {
       console.log({ err });
     }
