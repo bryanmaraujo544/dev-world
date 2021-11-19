@@ -9,3 +9,10 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(128) NOT NULL,
   password VARCHAR(512) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS favorited_users (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+  github_username VARCHAR(256) NOT NULL,
+  user_id INT NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);

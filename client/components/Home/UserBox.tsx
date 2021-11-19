@@ -8,6 +8,7 @@ import {
   RiToolsFill,
   RiEmotionSadLine,
 } from 'react-icons/ri';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useColorMode } from '@chakra-ui/color-mode';
 import ReactLoading from 'react-loading';
 
@@ -52,6 +53,7 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
       justifyContent="center"
       alignItems="center"
       boxShadow="inner"
+      position="relative"
     >
       {isLoading ? (
         <Flex gridColumn="1 / 5" justify="center">
@@ -204,6 +206,9 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
               </Text>
             </Flex>
           </Flex>
+          <Box position="absolute" right="16px" bottom="16px" cursor="pointer">
+            <AiOutlineHeart size="24px" />
+          </Box>
         </>
       )}
     </Grid>
