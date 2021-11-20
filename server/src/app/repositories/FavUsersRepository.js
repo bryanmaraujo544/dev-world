@@ -9,9 +9,12 @@ class FavUsersRepository {
 
   async findByUserId(userId) {
     const sql = `
-      SELECT favorited_users.*, users.name
-      FROM favorited_users
-      WHERE users_id = ?
+      SELECT u.id AS 'user_id', u.github_username AS 'user_username',
+      fav.id AS 'favuser_id', fav.github_username AS 'favuser_username'
+      FROM users AS u
+      INNER JOIN favorited_users AS fav
+      ON u.id = fav.user_id
+      WHERE u.id = ?;
     `;
     const favUsers = await db.query(sql, [userId]);
     return favUsers;
