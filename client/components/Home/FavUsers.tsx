@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import {
   MotionFlex,
   MotionGrid,
@@ -36,63 +37,72 @@ export const FavUsers = ({ favUsers: favusers }: PropTypes) => {
   };
 
   return (
-    <MotionFlex flexDir="column" my={12} w="100%">
+    <MotionFlex flexDir="column" my={16} w="100%">
       <MotionHeading>Favorited Users</MotionHeading>
       <MotionGrid
-        mt={6}
+        mt={8}
         templateColumns={['1fr', null, null, 'repeat(2, 1fr)']}
         gridGap={4}
       >
-        {favUsers.map((favUser) => (
-          <MotionFlex
-            boxShadow="inner"
-            p={6}
-            w="100%"
-            bg={grayColor}
-            rounded={8}
-            align="center"
-            justify="space-between"
-          >
-            <Flex align="center">
-              <Box
-                position="relative"
-                h="42px"
-                w="42px"
-                rounded={8}
-                sx={{
-                  '.profile-img': {
-                    borderRadius: '8px',
-                  },
-                }}
-                bg={grayColor}
-              >
-                <Image
-                  className="profile-img"
-                  src={
-                    `https://github.com/${favUser.favuser_username}.png` ||
-                    'https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png'
-                  }
-                  layout="fill"
-                />
-              </Box>
-              <Box>
-                <MotionText
-                  ml={4}
-                  fontSize="xl"
-                  fontWeight="bold"
-                  cursor="pointer"
+        <AnimatePresence>
+          {favUsers.map((favUser) => (
+            <MotionFlex
+              key={favUser.favuser_id}
+              boxShadow="inner"
+              p={6}
+              w="100%"
+              bg={grayColor}
+              rounded={8}
+              align="center"
+              justify="space-between"
+              exit={{
+                opacity: 0,
+                transition: {
+                  duration: 0.25,
+                },
+              }}
+            >
+              <Flex align="center">
+                <Box
+                  position="relative"
+                  h="42px"
+                  w="42px"
+                  rounded={8}
+                  sx={{
+                    '.profile-img': {
+                      borderRadius: '8px',
+                    },
+                  }}
+                  bg={grayColor}
                 >
-                  {favUser.favuser_username}
-                </MotionText>
-              </Box>
-            </Flex>
-            <AiFillHeart
-              size="18px"
-              cursor="pointer"
-              onClick={() => handleUnfavoriteUser(favUser.favuser_id)}
-            />
-          </MotionFlex>
-        ))}
+                  <Image
+                    className="profile-img"
+                    src={
+                      `https://github.com/${favUser.favuser_username}.png` ||
+                      'https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png'
+                    }
+                    layout="fill"
+                  />
+                </Box>
+                <Box>
+                  <MotionText
+                    ml={4}
+                    fontSize="xl"
+                    fontWeight="bold"
+                    cursor="pointer"
+                  >
+                    {favUser.favuser_username}
+                  </MotionText>
+                </Box>
+              </Flex>
+              <AiFillHeart
+                size="18px"
+                cursor="pointer"
+                onClick={() => handleUnfavoriteUser(favUser.favuser_id)}
+              />
+            </MotionFlex>
+          ))}
+        </AnimatePresence>
       </MotionGrid>
     </MotionFlex>
   );
