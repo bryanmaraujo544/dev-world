@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import {
   MotionFlex,
   MotionGrid,
@@ -8,6 +9,7 @@ import {
 import { Box, Flex } from '@chakra-ui/react';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { serverApi } from '../../services/serverApi';
 
 type FavUsers = {
   user_id: number;
@@ -20,10 +22,19 @@ type PropTypes = {
   favUsers: Array<FavUsers>;
 };
 
-export const FavUsers = ({ favUsers }: PropTypes) => {
+export const FavUsers = ({ favUsers: favusers }: PropTypes) => {
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
+  const [favUsers, setFavUsers] = useState(favusers);
 
-  console.log('<FavUsers/>', favUsers);
+  const handleUnfavoriteUser = async (id: number) => {
+    const newFavUsers = favUsers.filter((favUser) => favUser.favuser_id !== id);
+    setFavUsers(newFavUsers);
+
+    const {
+      data: { message },
+    } = await serverApi.delete(`/fav-users/${id}`);
+  };
+
   return (
     <MotionFlex flexDir="column" my={12} w="100%">
       <MotionHeading>Favorited Users</MotionHeading>
@@ -75,7 +86,11 @@ export const FavUsers = ({ favUsers }: PropTypes) => {
                 </MotionText>
               </Box>
             </Flex>
-            <AiFillHeart size="18px" />
+            <AiFillHeart
+              size="18px"
+              cursor="pointer"
+              onClick={() => handleUnfavoriteUser(favUser.favuser_id)}
+            />
           </MotionFlex>
         ))}
       </MotionGrid>

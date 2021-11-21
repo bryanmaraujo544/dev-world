@@ -14,6 +14,7 @@ router.post('/auth/login', AuthController.login);
 
 router.get('/fav-users', FavUserController.index);
 router.get('/fav-users/:userId', FavUserController.showFavoritesUsers);
+router.delete('/fav-users/:id', FavUserController.delete);
 
 
 module.exports = router;

@@ -18,8 +18,11 @@ class FavUsersRepository {
     `;
     const favUsers = await db.query(sql, [userId]);
     return favUsers;
+  }
 
-    
+  async delete(id) {
+    const sql = "DELETE FROM favorited_users WHERE id = ?";
+    await db.query(sql, [id]);
   }
 }
 
