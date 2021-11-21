@@ -11,9 +11,6 @@ import {
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useColorMode } from '@chakra-ui/color-mode';
 import ReactLoading from 'react-loading';
-import { serverApi } from '../../services/serverApi';
-import { parseCookies } from 'nookies';
-import jwt from 'jsonwebtoken';
 
 type User = {
   avatar_url: string;
@@ -43,8 +40,6 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
   const titleColor = useDarkLightColors('text.light', 'text.dark');
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
-
-
 
   const handleFavoriteAnUser = async () => {
   };
