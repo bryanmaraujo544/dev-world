@@ -13,7 +13,7 @@ router.get('/auth/profile', AuthController.show);
 router.post('/auth/login', AuthController.login);
 
 router.get('/fav-users', FavUserController.index);
-router.get('/fav-users/:userId', FavUserController.showUsersFavorites);
+router.get('/fav-users/:userId', FavUserController.showFavoritesUsers);
 
 
 module.exports = router;

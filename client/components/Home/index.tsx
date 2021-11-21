@@ -4,6 +4,7 @@ import { SearchBar } from './SearchBar';
 import { UserBox } from './UserBox';
 import { Box, Flex } from '@chakra-ui/react';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
+import { FavUsers } from './FavUsers';
 
 type User = {
   avatar_url: string;
@@ -21,7 +22,18 @@ type User = {
   starred_url: string;
 };
 
-export const Home = ({ token }: Record<string, string>) => {
+type FavUsers = {
+  user_id: number;
+  user_username: string;
+  favuser_id: number;
+  favuser_username: string;
+};
+
+type PropTypes = {
+  favUsers: Array<FavUsers>;
+};
+
+export const Home = ({ favUsers }: PropTypes) => {
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
 
   const [user, setUser] = useState<null | User>(null);
@@ -47,6 +59,9 @@ export const Home = ({ token }: Record<string, string>) => {
 
         {/* User Box */}
         <UserBox isLoading={isLoading} hasError={hasError} user={user} />
+
+        {/* Favorited Users */}
+        <FavUsers favUsers={favUsers} />
       </Flex>
     </Box>
   );

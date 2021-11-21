@@ -6,15 +6,17 @@ class FavUserController {
     res.send(favUsers);
   }
 
-  async showUsersFavorites(req, res) {
+  async showFavoritesUsers(req, res) {
     const { userId } = req.params;
-
+    console.log({ userId });
+    
     const favUsers = await FavUsersRepository.findByUserId(userId);
 
     if (favUsers.length === 0){
       return res.status(400).json({ message: 'this user does not has any favorited user', favUsers });
     }
 
+    console.log({ favUsers });
     res.send(favUsers);
   }
 }
