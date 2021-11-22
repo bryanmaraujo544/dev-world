@@ -42,11 +42,12 @@ class FavUserController {
 
     const alreadyExists = await FavUsersRepository.findByUsername(favuserUsername);
     if (alreadyExists) {
-      return res.status(400).json({ message: 'The user already exists' })
+      return res.status(400).json({ message: 'The user already exists', user: null })
     }
 
-    const user = await FavUsersRepository.create({ favuserUsername, userId: id });
-    res.send(user);
+    const [user] = await FavUsersRepository.create({ favuserUsername, userId: id });
+    console.log({ user });
+    res.json({ message: 'user created', user });
   }
 
   async delete(req, res) {

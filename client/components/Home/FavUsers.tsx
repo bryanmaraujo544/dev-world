@@ -22,14 +22,20 @@ type FavUsers = {
 type PropTypes = {
   favUsers: Array<FavUsers>;
   setFavUsers: any;
+  setIsFavorite: any;
 };
 
-export const FavUsers = ({ favUsers, setFavUsers }: PropTypes) => {
+export const FavUsers = ({
+  favUsers,
+  setFavUsers,
+  setIsFavorite,
+}: PropTypes) => {
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
 
   const handleUnfavoriteUser = async (id: number) => {
     const newFavUsers = favUsers.filter((favUser) => favUser.favuser_id !== id);
     setFavUsers(newFavUsers);
+    setIsFavorite(null);
 
     const {
       data: { message },

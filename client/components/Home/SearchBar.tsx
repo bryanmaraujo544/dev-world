@@ -36,7 +36,7 @@ type Props = {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setHasError: Dispatch<SetStateAction<boolean>>;
   setUser: Dispatch<SetStateAction<null | User>>;
-  setIsFavorite: Dispatch<SetStateAction<boolean>>;
+  setIsFavorite: any;
   nameUser: string;
   setNameUser: any;
 };
@@ -110,7 +110,7 @@ export const SearchBar = ({
           const { data: favuserData } = await serverApi(
             `/fav-user/${nameUser}`
           );
-          setIsFavorite(!!favuserData.favuser);
+          setIsFavorite(favuserData.favuser);
 
           // Setting error to false because if one of the search get error, the next searchs be reseted
           setHasError(false);

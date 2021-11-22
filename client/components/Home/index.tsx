@@ -32,10 +32,11 @@ type FavUsers = {
 };
 
 type PropTypes = {
-  favusers: Array<FavUsers>;
+  favUsers: Array<FavUsers>;
 };
 
-export const Home = ({ favusers }: PropTypes) => {
+export const Home = ({ favUsers: favusers }: PropTypes) => {
+  console.log({ favusers });
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
 
   const { '@token': token } = parseCookies();
@@ -44,7 +45,7 @@ export const Home = ({ favusers }: PropTypes) => {
   const [user, setUser] = useState<null | User>(null);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(null);
   const [nameUser, setNameUser] = useState(userInfos?.githubUsername || ''); // This state contains the text of the search box
   const [favUsers, setFavUsers] = useState(favusers);
 
@@ -76,10 +77,16 @@ export const Home = ({ favusers }: PropTypes) => {
           isFavorite={isFavorite}
           setIsFavorite={setIsFavorite}
           nameUser={nameUser}
+          favUsers={favUsers}
+          setFavUsers={setFavUsers}
         />
 
         {/* Favorited Users */}
-        <FavUsers favUsers={favUsers} setFavUsers={setFavUsers} />
+        <FavUsers
+          favUsers={favUsers}
+          setIsFavorite={setIsFavorite}
+          setFavUsers={setFavUsers}
+        />
       </Flex>
     </Box>
   );

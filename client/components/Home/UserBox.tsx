@@ -34,9 +34,11 @@ type props = {
   isLoading: boolean;
   hasError: boolean;
   user: User | null;
-  isFavorite: boolean;
+  isFavorite: any;
   setIsFavorite: any;
   nameUser: string;
+  setFavUsers: any;
+  favUsers: any;
 };
 
 export const UserBox = ({
@@ -46,6 +48,8 @@ export const UserBox = ({
   isFavorite,
   setIsFavorite,
   nameUser,
+  favUsers,
+  setFavUsers,
 }: props) => {
   const { colorMode } = useColorMode();
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
@@ -53,14 +57,28 @@ export const UserBox = ({
   const titleColor = useDarkLightColors('text.light', 'text.dark');
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
 
+  console.log(isFavorite);
+
   const handleUnfavoriteUser = async () => {
-    setIsFavorite(true);
+    setIsFavorite(null);
+    const newFavUsers = favUsers.filter(
+      (favUser: any) => favUser.favuser_id !== isFavorite?.favuser_id
+    );
+    setFavUsers(newFavUsers);
+
+    const {
+      data: { message },
+    } = await serverApi.delete(`/fav-users/${isFavorite?.favuser_id}`);
+  };
+
+  const handleFavoriteUser = async () => {
     const { data } = await serverApi.post('/fav-users', {
       favuserUsername: nameUser,
     });
+    console.log('data-user', data.user);
+    setFavUsers((prevState: any) => [...prevState, data.user]);
+    setIsFavorite(data?.user);
   };
-
-  const handleFavoriteUser = async () => {};
 
   return (
     <Grid
@@ -230,10 +248,10 @@ export const UserBox = ({
 
           {/* Favorite a user button */}
           <Box position="absolute" right="16px" bottom="16px" cursor="pointer">
-            {isFavorite ? (
+            {isFavorite !== null ? (
               <AiFillHeart size="24px" onClick={handleUnfavoriteUser} />
             ) : (
-              <AiOutlineHeart size="24px" onClick={handleUnfavoriteUser} />
+              <AiOutlineHeart size="24px" onClick={handleFavoriteUser} />
             )}
           </Box>
         </>
