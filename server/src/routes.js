@@ -19,7 +19,7 @@ router.get('/fav-users', FavUserController.index);
 router.get('/fav-user/:favuserUsername', jwtAuth, FavUserController.show);
 router.get('/fav-users/:userId', FavUserController.showFavoritesUsers);
 router.delete('/fav-users/:id', FavUserController.delete);
-router.post('/fav-users', FavUserController.store);
+router.post('/fav-users', jwtAuth, FavUserController.store);
 
 
 module.exports = router;

@@ -5,6 +5,8 @@ import { UserBox } from './UserBox';
 import { Box, Flex } from '@chakra-ui/react';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
 import { FavUsers } from './FavUsers';
+import jwt from 'jsonwebtoken';
+import { parseCookies } from 'nookies';
 
 type User = {
   avatar_url: string;
@@ -30,16 +32,21 @@ type FavUsers = {
 };
 
 type PropTypes = {
-  favUsers: Array<FavUsers>;
+  favusers: Array<FavUsers>;
 };
 
-export const Home = ({ favUsers }: PropTypes) => {
+export const Home = ({ favusers }: PropTypes) => {
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
+
+  const { '@token': token } = parseCookies();
+  const userInfos = jwt.decode(token);
 
   const [user, setUser] = useState<null | User>(null);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [nameUser, setNameUser] = useState(userInfos?.githubUsername || ''); // This state contains the text of the search box
+  const [favUsers, setFavUsers] = useState(favusers);
 
   return (
     <Box
@@ -57,6 +64,8 @@ export const Home = ({ favUsers }: PropTypes) => {
           setHasError={setHasError}
           setIsLoading={setIsLoading}
           setIsFavorite={setIsFavorite}
+          nameUser={nameUser}
+          setNameUser={setNameUser}
         />
 
         {/* User Box */}
@@ -65,10 +74,12 @@ export const Home = ({ favUsers }: PropTypes) => {
           hasError={hasError}
           user={user}
           isFavorite={isFavorite}
+          setIsFavorite={setIsFavorite}
+          nameUser={nameUser}
         />
 
         {/* Favorited Users */}
-        <FavUsers favUsers={favUsers} />
+        <FavUsers favUsers={favUsers} setFavUsers={setFavUsers} />
       </Flex>
     </Box>
   );

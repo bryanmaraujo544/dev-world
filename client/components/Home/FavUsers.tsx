@@ -21,11 +21,11 @@ type FavUsers = {
 
 type PropTypes = {
   favUsers: Array<FavUsers>;
+  setFavUsers: any;
 };
 
-export const FavUsers = ({ favUsers: favusers }: PropTypes) => {
+export const FavUsers = ({ favUsers, setFavUsers }: PropTypes) => {
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
-  const [favUsers, setFavUsers] = useState(favusers);
 
   const handleUnfavoriteUser = async (id: number) => {
     const newFavUsers = favUsers.filter((favUser) => favUser.favuser_id !== id);

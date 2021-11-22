@@ -12,6 +12,7 @@ import {
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useColorMode } from '@chakra-ui/color-mode';
 import ReactLoading from 'react-loading';
+import { serverApi } from '../../services/serverApi';
 
 type User = {
   avatar_url: string;
@@ -34,16 +35,32 @@ type props = {
   hasError: boolean;
   user: User | null;
   isFavorite: boolean;
+  setIsFavorite: any;
+  nameUser: string;
 };
 
-export const UserBox = ({ isLoading, hasError, user, isFavorite }: props) => {
+export const UserBox = ({
+  isLoading,
+  hasError,
+  user,
+  isFavorite,
+  setIsFavorite,
+  nameUser,
+}: props) => {
   const { colorMode } = useColorMode();
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
   const titleColor = useDarkLightColors('text.light', 'text.dark');
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
 
-  const handleFavoriteAnUser = async () => {};
+  const handleUnfavoriteUser = async () => {
+    setIsFavorite(true);
+    const { data } = await serverApi.post('/fav-users', {
+      favuserUsername: nameUser,
+    });
+  };
+
+  const handleFavoriteUser = async () => {};
 
   return (
     <Grid
@@ -212,17 +229,11 @@ export const UserBox = ({ isLoading, hasError, user, isFavorite }: props) => {
           </Flex>
 
           {/* Favorite a user button */}
-          <Box
-            position="absolute"
-            right="16px"
-            bottom="16px"
-            cursor="pointer"
-            onClick={handleFavoriteAnUser}
-          >
+          <Box position="absolute" right="16px" bottom="16px" cursor="pointer">
             {isFavorite ? (
-              <AiFillHeart size="24px" />
+              <AiFillHeart size="24px" onClick={handleUnfavoriteUser} />
             ) : (
-              <AiOutlineHeart size="24px" />
+              <AiOutlineHeart size="24px" onClick={handleUnfavoriteUser} />
             )}
           </Box>
         </>

@@ -37,6 +37,8 @@ type Props = {
   setHasError: Dispatch<SetStateAction<boolean>>;
   setUser: Dispatch<SetStateAction<null | User>>;
   setIsFavorite: Dispatch<SetStateAction<boolean>>;
+  nameUser: string;
+  setNameUser: any;
 };
 
 type UserJWT = {
@@ -50,14 +52,14 @@ export const SearchBar = ({
   setUser,
   setHasError,
   setIsFavorite,
+  nameUser,
+  setNameUser,
 }: Props) => {
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
 
   const { '@token': token } = parseCookies();
   const userInfos = jwt.decode(token);
-
-  const [nameUser, setNameUser] = useState(userInfos?.githubUsername || '');
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setNameUser(e.target.value);

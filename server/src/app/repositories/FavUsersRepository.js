@@ -26,7 +26,11 @@ class FavUsersRepository {
       (github_username, user_id)
       VALUES (?, ?)
     `;
-    const favuser = db.query(sql, [favuserUsername, userId]);
+    await db.query(sql, [favuserUsername, userId]);
+    const favuser = await db.query(
+      "SELECT * FROM favorited_users WHERE github_username = ?",
+      [favuserUsername]
+    );
     return favuser;
   }
 
@@ -44,6 +48,7 @@ class FavUsersRepository {
     `;
     db.query(sql, [username]);
   }
+
 }
 
 module.exports = new FavUsersRepository;
