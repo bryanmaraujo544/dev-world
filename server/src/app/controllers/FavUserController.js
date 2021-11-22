@@ -30,7 +30,7 @@ class FavUserController {
     const favUsers = await FavUsersRepository.findByUserId(userId);
 
     if (favUsers.length === 0){
-      return res.status(400).json({ message: 'this user does not has any favorited user', favUsers });
+      return res.json({ message: 'this user does not has any favorited user', favUsers });
     }
     res.send(favUsers);
   }

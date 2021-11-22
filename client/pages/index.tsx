@@ -44,12 +44,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // I'm not checking if the jwt is valid because I have sure it is because we checked before the page's rendered (above)
   const tokenDecoded = jwt.decode(token);
   const { data: favUsers } = await serverApi.get(
-    `/fav-users/${tokenDecoded.id}`
+    `/fav-users/${tokenDecoded?.id}`
   );
 
   return {
     props: {
-      favUsers: favUsers,
+      favUsers: favUsers.favUsers,
     },
   };
 };
