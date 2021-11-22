@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
 import { Grid, Box, Flex, Heading, Text, Link } from '@chakra-ui/react';
 import { HiOutlineUsers, HiUsers } from 'react-icons/hi';
@@ -32,17 +33,17 @@ type props = {
   isLoading: boolean;
   hasError: boolean;
   user: User | null;
+  isFavorite: boolean;
 };
 
-export const UserBox = ({ isLoading, hasError, user }: props) => {
+export const UserBox = ({ isLoading, hasError, user, isFavorite }: props) => {
   const { colorMode } = useColorMode();
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
   const titleColor = useDarkLightColors('text.light', 'text.dark');
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
 
-  const handleFavoriteAnUser = async () => {
-  };
+  const handleFavoriteAnUser = async () => {};
 
   return (
     <Grid
@@ -218,7 +219,11 @@ export const UserBox = ({ isLoading, hasError, user }: props) => {
             cursor="pointer"
             onClick={handleFavoriteAnUser}
           >
-            <AiOutlineHeart size="24px" />
+            {isFavorite ? (
+              <AiFillHeart size="24px" />
+            ) : (
+              <AiOutlineHeart size="24px" />
+            )}
           </Box>
         </>
       )}

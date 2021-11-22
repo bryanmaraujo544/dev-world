@@ -20,9 +20,29 @@ class FavUsersRepository {
     return favUsers;
   }
 
+  async create({ favuserUsername, userId }) {
+    const sql = `
+      INSERT INTO favorited_users 
+      (github_username, user_id)
+      VALUES (?, ?)
+    `;
+    const favuser = db.query(sql, [favuserUsername, userId]);
+    return favuser;
+  }
+
   async delete(id) {
     const sql = "DELETE FROM favorited_users WHERE id = ?";
     await db.query(sql, [id]);
+  }
+
+
+  async findByUsername(username) {
+    const sql = `
+      SELECT *
+      FROM favorited_users
+      WHERE github_username = ?
+    `;
+    db.query(sql, [username]);
   }
 }
 

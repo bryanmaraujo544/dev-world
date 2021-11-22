@@ -39,6 +39,7 @@ export const Home = ({ favUsers }: PropTypes) => {
   const [user, setUser] = useState<null | User>(null);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <Box
@@ -55,10 +56,16 @@ export const Home = ({ favUsers }: PropTypes) => {
           setUser={setUser}
           setHasError={setHasError}
           setIsLoading={setIsLoading}
+          setIsFavorite={setIsFavorite}
         />
 
         {/* User Box */}
-        <UserBox isLoading={isLoading} hasError={hasError} user={user} />
+        <UserBox
+          isLoading={isLoading}
+          hasError={hasError}
+          user={user}
+          isFavorite={isFavorite}
+        />
 
         {/* Favorited Users */}
         <FavUsers favUsers={favUsers} />

@@ -14,6 +14,7 @@ import { MotionFlex } from '../../utils/getMotionComponents';
 import { BiSearchAlt } from 'react-icons/bi';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
 import { toast } from 'react-toastify';
+import { serverApi } from '../../services/serverApi';
 
 type User = {
   avatar_url: string;
@@ -35,6 +36,7 @@ type Props = {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setHasError: Dispatch<SetStateAction<boolean>>;
   setUser: Dispatch<SetStateAction<null | User>>;
+  setIsFavorite: Dispatch<SetStateAction<boolean>>;
 };
 
 type UserJWT = {
@@ -43,12 +45,18 @@ type UserJWT = {
   iat: number | null;
 };
 
-export const SearchBar = ({ setIsLoading, setUser, setHasError }: Props) => {
+export const SearchBar = ({
+  setIsLoading,
+  setUser,
+  setHasError,
+  setIsFavorite,
+}: Props) => {
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
 
   const { '@token': token } = parseCookies();
   const userInfos = jwt.decode(token);
+
   const [nameUser, setNameUser] = useState(userInfos?.githubUsername || '');
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -96,6 +104,12 @@ export const SearchBar = ({ setIsLoading, setUser, setHasError }: Props) => {
         toast.error('Type Something!');
       } else {
         try {
+          // Checking if the user is favorited or not, and grabbing its info
+          const { data: favuserData } = await serverApi(
+            `/fav-user/${nameUser}`
+          );
+          setIsFavorite(!!favuserData.favuser);
+
           // Setting error to false because if one of the search get error, the next searchs be reseted
           setHasError(false);
           setIsLoading(true);
@@ -106,7 +120,6 @@ export const SearchBar = ({ setIsLoading, setUser, setHasError }: Props) => {
             `users/${nameUser}/starred`
           );
           const starredAmount = starredRepos.length;
-
           const mostUsedLangs = await getMostUsedLangs();
 
           setIsLoading(false);
