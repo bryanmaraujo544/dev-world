@@ -53,10 +53,10 @@ export const FavUsers = ({
       >
         <AnimatePresence>
           {
-            favUsers.length === 0 ? (
+            favUsers?.length === 0 ? (
               <h1>There is no favorited users </h1>
             ) : (
-              favUsers.map((favUser) => (
+              favUsers?.map((favUser) => (
                 <MotionFlex
                   key={favUser.favuser_id}
                   boxShadow="inner"

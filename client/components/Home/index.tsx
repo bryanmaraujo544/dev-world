@@ -57,7 +57,7 @@ export const Home = ({ favUsers: favusers }: PropTypes) => {
       bg={bgColor}
       px={[8, 12, 16, 20, 24]}
     >
-      <Header />
+      <Header isHome />
       <Flex direction="column" mt={[12, 16, 20, null, 24]}>
         {/* Search Bar */}
         <SearchBar

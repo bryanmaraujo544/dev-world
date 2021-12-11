@@ -18,7 +18,11 @@ import { HiOutlineLogout } from 'react-icons/hi';
 import { destroyCookie } from 'nookies';
 import { useRouter } from 'next/router';
 
-export const Header = () => {
+type Props = {
+    isHome?: boolean
+}
+
+export const Header = ({ isHome }: Props) => {
     const sunControls = useAnimation();
     const moonControls = useAnimation();
     // Function that return the currently color mode and one function to toggle that
@@ -100,16 +104,19 @@ export const Header = () => {
                             <BsFillMoonStarsFill size="100%" />
                         </MotionBox>
                     </MotionFlex>
-                    <MotionBox
-                        w="28px"
-                        h="28px"
-                        ml={3}
-                        cursor="pointer"
-                        whileHover={{ x: 3 }}
-                        onClick={() => setModalIsOpen(true)}
-                    >
-                        <HiOutlineLogout size="100%" />
-                    </MotionBox>
+                    {isHome && (
+                        <MotionBox
+                            w="28px"
+                            h="28px"
+                            ml={3}
+                            cursor="pointer"
+                            whileHover={{ x: 3 }}
+                            onClick={() => setModalIsOpen(true)}
+                        >
+                            <HiOutlineLogout size="100%" />
+                        </MotionBox>
+
+                    )}
                 </MotionFlex>
             </Flex>
         <Modal

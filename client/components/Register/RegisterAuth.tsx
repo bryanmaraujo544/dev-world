@@ -12,6 +12,7 @@ import {
   fastContainerVariants,
 } from '../../animations/fadeIn';
 import { serverApi } from '../../services/serverApi';
+import { githubApi } from '../../services/githubApi';
 
 type FormTypes = {
   name: string;
@@ -39,6 +40,12 @@ export const RegisterAuth = () => {
     e?.preventDefault();
 
     try {
+      try {
+        const { data: githubData } = await githubApi.get(`users/${githubUsername}`);
+      } catch (githubErr) {
+        return toast.error('This github Username does not exists')
+      }
+
       const { data } = await serverApi.post('/users', {
         name,
         githubUsername,
@@ -49,7 +56,7 @@ export const RegisterAuth = () => {
       await toast.success(data.message);
       router.push('/login');
     } catch (err) {
-      console.log({ err });
+      console.log(err)
     }
   };
 
@@ -65,16 +72,7 @@ export const RegisterAuth = () => {
   const Input = forwardRef((props: any, ref: any) => (
     <MotionInput
       ref={ref}
-      variants={xRightAnimationVariants}
-      p={9}
-      bg={inputBg}
-      border="none"
-      fontSize="xl"
-      fontWeight="bold"
-      color={inputColor}
-      boxShadow="inner"
-      rounded="16px"
-      mt={4}
+
       {...props}
     />
   ));
@@ -87,20 +85,60 @@ export const RegisterAuth = () => {
         animate="show"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Input
+        <MotionInput
           placeholder="Enter your name..."
+          variants={xRightAnimationVariants}
+          p={9}
+          bg={inputBg}
+          border="none"
+          fontSize="xl"
+          fontWeight="bold"
+          color={inputColor}
+          boxShadow="inner"
+          rounded="16px"
+          mt={4}
           {...register('name', { required: true })}
         />
-        <Input
+        <MotionInput
           placeholder="Enter your github username"
+          variants={xRightAnimationVariants}
+          p={9}
+          bg={inputBg}
+          border="none"
+          fontSize="xl"
+          fontWeight="bold"
+          color={inputColor}
+          boxShadow="inner"
+          rounded="16px"
+          mt={4}
           {...register('githubUsername', { required: true })}
         />
-        <Input
+        <MotionInput
           placeholder="Enter your email"
+          variants={xRightAnimationVariants}
+          p={9}
+          bg={inputBg}
+          border="none"
+          fontSize="xl"
+          fontWeight="bold"
+          color={inputColor}
+          boxShadow="inner"
+          rounded="16px"
+          mt={4}
           {...register('email', { required: true })}
         />
-        <Input
+        <MotionInput
           placeholder="Enter your password"
+          variants={xRightAnimationVariants}
+          p={9}
+          bg={inputBg}
+          border="none"
+          fontSize="xl"
+          fontWeight="bold"
+          color={inputColor}
+          boxShadow="inner"
+          rounded="16px"
+          mt={4}
           {...register('password', { required: true })}
           type="password"
         />
