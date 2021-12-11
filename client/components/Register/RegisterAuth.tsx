@@ -66,7 +66,7 @@ export const RegisterAuth = () => {
     <MotionInput
       ref={ref}
       variants={xRightAnimationVariants}
-      p={10}
+      p={9}
       bg={inputBg}
       border="none"
       fontSize="xl"

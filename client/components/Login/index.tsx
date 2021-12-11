@@ -8,7 +8,7 @@ const Login = () => {
       templateColumns={['1fr', '1fr', '1fr', '1fr 0.75fr']}
       w="100%"
       gap={16}
-      mt={[6, null, null, 12, 24]}
+      mt={[6, null, null, 12, 16]}
     >
       <TextSectionAuth
         title="Sign in to find new developers"

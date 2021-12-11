@@ -8,7 +8,7 @@ export const Register: NextPage = () => {
   const colorMode = useDarkLightColors('bg.light', 'bg.dark');
 
   return (
-    <Box px={[8, 12, 16, 20, 24]} bg={colorMode} h="100%">
+    <Box px={[8, 12, 16, 20, 24]} bg={colorMode} minHeight="100vh" h="100%">
       <Header />
       <RegisterSection />
     </Box>

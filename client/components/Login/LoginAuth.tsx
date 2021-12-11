@@ -69,7 +69,7 @@ export const LoginAuth = () => {
         <MotionInput
           variants={xRightAnimationVariants}
           boxShadow="inner"
-          p={10}
+          p={9}
           bg={inputBg}
           border="none"
           fontSize="xl"
@@ -83,7 +83,7 @@ export const LoginAuth = () => {
         <MotionInput
           variants={xRightAnimationVariants}
           boxShadow="inner"
-          p={10}
+          p={9}
           bg={inputBg}
           border="none"
           fontSize="xl"

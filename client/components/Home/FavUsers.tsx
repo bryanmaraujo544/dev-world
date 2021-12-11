@@ -52,7 +52,6 @@ export const FavUsers = ({
         gridGap={4}
       >
         <AnimatePresence>
-          
           {
             favUsers.length === 0 ? (
               <h1>There is no favorited users </h1>
@@ -85,7 +84,6 @@ export const FavUsers = ({
                           borderRadius: '8px',
                         },
                       }}
-                      bg={grayColor}
                     >
                       <Image
                         className="profile-img"

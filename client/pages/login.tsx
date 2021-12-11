@@ -14,6 +14,7 @@ const Login: NextPage = () => {
       overflow="hidden"
       bg={colorMode}
       px={[8, 12, 16, 20, 24]}
+      pb={[8, 12, 16, 20, 24]}
       h="100%"
     >
       <Header />
