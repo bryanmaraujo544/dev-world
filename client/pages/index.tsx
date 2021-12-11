@@ -47,9 +47,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `/fav-users/${tokenDecoded?.id}`
   );
 
+  console.log(favUsers)
+
   return {
     props: {
-      favUsers: favUsers.favUsers,
+      favUsers: favUsers,
     },
   };
 };
