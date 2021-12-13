@@ -8,7 +8,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-![Animação](https://user-images.githubusercontent.com/62571814/145648954-4525ffb3-7bd1-4f01-b627-fdbf96425ea9.gif)
+![Animação](https://user-images.githubusercontent.com/62571814/145886786-bd3a9bfb-2744-4d6d-88a2-7cc186fa6f76.gif)
 
 > Application to developers find another developers in Github and favorite any they want
 
