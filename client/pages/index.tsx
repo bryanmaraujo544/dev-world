@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { data } = await serverApi.get('auth');
 
-  if (!data.auth) {
+  if (data.auth === false || !token) {
     return {
       redirect: {
         destination: '/login',

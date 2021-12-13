@@ -126,7 +126,7 @@ export const Header = ({ isHome }: Props) => {
         >
             <ModalOverlay />
             <ModalContent>
-            <ModalHeader>Create your account</ModalHeader>
+            <ModalHeader>Get out of your account</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
                 <Text>Do you really want to get out?</Text>

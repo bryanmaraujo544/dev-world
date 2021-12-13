@@ -136,7 +136,7 @@ export const UserBox = ({
 
           {/* Bio */}
           <Flex direction="column" h="100%" justify="flex-start">
-            <Heading as="h2" color={titleColor}>
+            <Heading as="h2" fontSize="3xl" color={titleColor}>
               {user?.name}
             </Heading>
             <Link
@@ -149,7 +149,7 @@ export const UserBox = ({
             >
               {user?.login}
             </Link>
-            <Text fontSize="xl" color={grayLightColor} fontWeight="700" mt={4}>
+            <Text fontSize="l" color={grayLightColor} fontWeight="700" mt={4}>
               {user?.bio}
             </Text>
           </Flex>
@@ -158,13 +158,13 @@ export const UserBox = ({
           <Flex direction="column" h="100%" justify="flex-start">
             <Flex align="center" mb={2}>
               <RiToolsFill size="24px" />
-              <Heading as="h3" mx={2}>
+              <Heading as="h3"  fontSize="3xl" mx={2}>
                 Languages
               </Heading>
             </Flex>
             {user?.mostUsedLangs.map((lang: string) => (
               <Text
-                fontSize="2xl"
+                fontSize="xl"
                 fontWeight="500"
                 color={grayLightColor}
                 mt={2}
