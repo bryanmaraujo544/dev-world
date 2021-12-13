@@ -14,7 +14,11 @@
 
 ## 💻 How it was made
 
-To the Frontend of the application it was used Next.js, that is a Framework for React and it was styled using Chakra UI. It's consuming my own API made using Node.js. And the data is being storaged in MySQL database
+To the Frontend of the application it was used Next.js, that is a Framework for React and it was styled using Chakra UI. It's consuming my own API made using Node.js. And the data is being storaged in MySQL database.
+
+I am using the Github API to get the user's information and show to the application's user
+
+The authentication it was made using Node.js and JWT to the exchanges between client and server. The passwords of the user is been encrypted. It also has a social auth from Github.
 
 ## 🚀 Technologies used in project
 
