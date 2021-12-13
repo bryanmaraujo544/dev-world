@@ -150,7 +150,7 @@ export const RegisterAuth = () => {
           Sign Up
         </Button>
       </motion.form>
-      <SocialAuth />
+      <SocialAuth isRegister />
     </MotionFlex>
   );
 };

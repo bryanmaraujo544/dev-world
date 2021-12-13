@@ -40,6 +40,22 @@ class UsersRepository {
 
     return user;
   }
+
+  async createWithGithub(code) {
+    const url = 'https://github.com/login/oauth/access_token';
+
+    const { data } = await axiox.post(url, null, {
+      params: {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        code,
+      }, 
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+    console.log({ data })
+  }
 };
 
 module.exports = new UsersRepository;

@@ -51,6 +51,8 @@ export function AuthProvider({ children }: any) {
     }
   };
 
+  
+
   return (
     <AuthContext.Provider value={{ signIn }}>{children}</AuthContext.Provider>
   );

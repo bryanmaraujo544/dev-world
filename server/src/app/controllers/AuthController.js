@@ -39,6 +39,7 @@ class AuthController {
     console.log({ userInfos });
 
   }
+  
 }
 
 module.exports = new AuthController;
