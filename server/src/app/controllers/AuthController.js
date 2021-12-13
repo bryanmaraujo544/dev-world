@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 class AuthController {
   async login(req, res) {
     const { email, password } = req.body;
-    console.log(email, password);
 
     // Check if there is some user with this email
     const user = await AuthRepository.findByEmail(email);
@@ -33,19 +32,14 @@ class AuthController {
     const { authorization } = req.headers;
 
     const token = authorization.split(' ')[1];
-    console.log({ token });
 
     const userInfos = jwt.decode(token);
-    console.log({ userInfos });
-
   }
 
   async signInWithGithub(req, res) {
     const { code } = req.body;
-    console.log({ code });
 
     if (!code) {
-      console.log('NO CODE');
       return res.json({ message: 'No code ', token: null});
     }
 
@@ -67,7 +61,6 @@ class AuthController {
       }
 
       const token = createToken(user);
-      console.log({ token });
       return res.json({ message: 'User logged in', token });
     } catch (err) {
       return res.json({ token: null });

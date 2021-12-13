@@ -30,7 +30,6 @@ export const FavUsers = ({
   setFavUsers,
   setIsFavorite,
 }: PropTypes) => {
-  console.log({ favUsers });
   const grayColor = useDarkLightColors('gray.200', 'gray.800');
 
   const handleUnfavoriteUser = async (id: number) => {

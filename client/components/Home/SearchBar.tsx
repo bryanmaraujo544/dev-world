@@ -131,7 +131,6 @@ export const SearchBar = ({
             mostUsedLangs,
           });
         } catch (err) {
-          console.log(err);
           setHasError(true);
           setIsLoading(false);
         }

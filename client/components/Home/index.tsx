@@ -36,7 +36,6 @@ type PropTypes = {
 };
 
 export const Home = ({ favUsers: favusers }: PropTypes) => {
-  console.log('<Home/>', { favusers });
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
 
   const { '@token': token } = parseCookies();

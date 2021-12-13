@@ -57,8 +57,6 @@ export const UserBox = ({
   const titleColor = useDarkLightColors('text.light', 'text.dark');
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
 
-  console.log(isFavorite);
-
   const handleUnfavoriteUser = async () => {
     setIsFavorite(null);
     const newFavUsers = favUsers.filter(
@@ -75,7 +73,6 @@ export const UserBox = ({
     const { data } = await serverApi.post('/fav-users', {
       favuserUsername: nameUser,
     });
-    console.log('data-user', data.user);
     setFavUsers((prevState: any) => [...prevState, data.user]);
     setIsFavorite(data?.user);
   };

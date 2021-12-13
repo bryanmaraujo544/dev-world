@@ -15,9 +15,6 @@ export const SocialAuth = ({ isRegister }: Props) => {
     const { colorMode } = useColorMode();
     const borderColor = useDarkLightColors('gray.400', 'gray.600');
     const { githubSignInUrl } = useContext(AuthContext);
-    console.log({ githubSignInUrl });
-
-    
 
     return (
         <MotionFlex 

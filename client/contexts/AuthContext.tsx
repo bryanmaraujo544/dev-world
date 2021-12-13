@@ -28,11 +28,9 @@ export function AuthProvider({ children }: any) {
       const { '@token': token } = parseCookies();
 
       if (token) {
-        console.log('there is token');
         // getting the user's information based on the jwt that is been sending throug headers;
         // We defined that every axios request has the header containing the jwt
         const { data } = await serverApi('/auth/profile');
-        console.log({ data });
       }
     })();
   }, []);
@@ -79,7 +77,7 @@ export function AuthProvider({ children }: any) {
     (async () => {
       const url = window.location.href;
       const hasGithubCode = url.includes('?code=');
-      console.log(url, hasGithubCode);
+      
       if (hasGithubCode) {
         const [urlWithoutCode, githubCode] = url.split('?code=');
 

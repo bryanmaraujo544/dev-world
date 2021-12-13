@@ -36,13 +36,11 @@ class AuthRepository {
       }
     });
 
-    console.log('data from github access token', data);
     const { data: GHUser } = await axios.get('https://api.github.com/user', {
       headers: {
         authorization: `Bearer ${data.access_token}`
       }
     });
-    console.log(GHUser);
 
     const { login, name } = GHUser;
     return { login, name };

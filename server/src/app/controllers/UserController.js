@@ -8,7 +8,6 @@ class UserController {
 
   async store(req, res) {
     const { name, githubUsername, email, password } = req.body;
-    console.log(name, githubUsername, email, password);
 
     const githubUsernameExists = await UsersRepository.findByGithubUsername(githubUsername);
     const emailExists = await UsersRepository.findByEmail(email);
