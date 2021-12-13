@@ -39,6 +39,40 @@ class AuthController {
     console.log({ userInfos });
 
   }
+
+  async signInWithGithub(req, res) {
+    const { code } = req.body;
+    console.log({ code });
+
+    if (!code) {
+      console.log('NO CODE');
+      return res.json({ message: 'No code ', token: null});
+    }
+
+    try {
+      // Grabbing github user's information based on the code received from frontend
+      // This code was received by github auth page
+      const result = await AuthRepository.getGithubUser(code); 
+
+      // Checking if database contains a user using the username received from github infos
+      const user = await AuthRepository.findByUsername(result.login);
+
+      // If there is no username in the db with this username, we create one and create the token based on it
+      // Because we need the id of user in database to make other verifications later
+      if (!user) {
+        const userCreated = await AuthRepository.create({ name: result.name, github_username: result.login, email: '', password: '' });
+        const token = createToken(userCreated);
+
+        return res.json({ message: 'User logged id', token });
+      }
+
+      const token = createToken(user);
+      console.log({ token });
+      return res.json({ message: 'User logged in', token });
+    } catch (err) {
+      return res.json({ token: null });
+    }
+  }
   
 }
 

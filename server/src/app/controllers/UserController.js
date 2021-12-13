@@ -26,9 +26,6 @@ class UserController {
     res.json({ message: "User created" });
   }
 
-  async storeWithGithub(req, res) {
-    
-  }
 
 
 };

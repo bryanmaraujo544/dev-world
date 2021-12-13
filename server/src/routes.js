@@ -14,6 +14,7 @@ router.get('/auth', jwtAuth, (req, res) => {
 });
 router.get('/auth/profile', AuthController.show);
 router.post('/auth/login', AuthController.login);
+router.post('/auth/github', AuthController.signInWithGithub)
 
 router.get('/fav-users', FavUserController.index);
 router.get('/fav-user/:favuserUsername', jwtAuth, FavUserController.show);
