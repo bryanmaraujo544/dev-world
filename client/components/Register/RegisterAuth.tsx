@@ -52,10 +52,13 @@ export const RegisterAuth = () => {
         email,
         password,
       });
+      console.log({ data });
 
       await toast.success(data.message);
       router.push('/login');
-    } catch (err) {
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message);
+
       console.log(err);
     }
   };

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import { decode } from 'jsonwebtoken';
 import { useDarkLightColors } from '../../hooks/useDarkLightColors';
 import { Grid, Box, Flex, Heading, Text, Link } from '@chakra-ui/react';
 import { HiOutlineUsers, HiUsers } from 'react-icons/hi';
@@ -13,6 +14,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useColorMode } from '@chakra-ui/color-mode';
 import ReactLoading from 'react-loading';
 import { serverApi } from '../../services/serverApi';
+import { parseCookies } from 'nookies';
 
 type User = {
   avatar_url: string;
@@ -56,6 +58,11 @@ export const UserBox = ({
   const grayLightColor = useDarkLightColors('text.600', 'gray.500');
   const titleColor = useDarkLightColors('text.light', 'text.dark');
   const bgColor = useDarkLightColors('bg.light', 'bg.dark');
+  
+  const { '@token': token } = parseCookies();
+  const userSelectedUsername = user?.login;
+  const { githubUsername: userLoggedUsername } = decode(token);
+  console.log({ userLoggedUsername });
 
   const handleUnfavoriteUser = async () => {
     setIsFavorite(null);
@@ -244,13 +251,15 @@ export const UserBox = ({
           </Flex>
 
           {/* Favorite a user button */}
-          <Box position="absolute" right="16px" bottom="16px" cursor="pointer">
-            {isFavorite !== null ? (
-              <AiFillHeart size="24px" onClick={handleUnfavoriteUser} />
-            ) : (
-              <AiOutlineHeart size="24px" onClick={handleFavoriteUser} />
-            )}
-          </Box>
+          {userLoggedUsername !== userSelectedUsername && (
+            <Box position="absolute" right="16px" bottom="16px" cursor="pointer">
+              {isFavorite !== null ? (
+                <AiFillHeart size="24px" onClick={handleUnfavoriteUser} />
+              ) : (
+                <AiOutlineHeart size="24px" onClick={handleFavoriteUser} />
+              )}
+            </Box>
+          )}
         </>
       )}
     </Grid>
